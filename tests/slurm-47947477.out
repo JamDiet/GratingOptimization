@@ -1,0 +1,23 @@
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ python -u -m grating_opt.main
+[WARNING 06-01 20:27:53] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 74, in <module>
+    main(args)
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 49, in main
+    client, best_values, all_values = optimizer.optimize_params(
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/optimizer.py", line 104, in optimize_params
+    from mpi4py.futures import MPIPoolExecutor
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/__init__.py", line 19, in <module>
+    from .pool import (
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/pool.py", line 13, in <module>
+    from . import _core
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 22, in <module>
+    from .. import MPI
+ImportError: libmpi.so.12: cannot open shared object file: No such file or directory

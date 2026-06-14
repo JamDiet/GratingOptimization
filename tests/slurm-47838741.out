@@ -1,0 +1,49 @@
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ python -u -m grating_opt.main
+[WARNING 05-27 12:46:31] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+  0%|          | 0/2 [00:00<?, ?it/s][INFO 05-27 12:46:31] ax.api.client: Generated new trial 0 with parameters {'duty_cycle': 0.548682, 'pillar_thickness': 1283.03362, 'residual_thickness': 104.619201, 'lines_per_mm': 578.457594, 'aoi': 34.641442} using GenerationNode Sobol.
+0
+Submitted batch job 47838744
+SUCCESS
+[INFO 05-27 12:48:18] ax.api.client: Trial 0 marked COMPLETED.
+ 50%|█████     | 1/2 [01:46<01:46, 106.24s/it][INFO 05-27 12:48:18] ax.api.client: Generated new trial 1 with parameters {'duty_cycle': 0.404673, 'pillar_thickness': 1426.260742, 'residual_thickness': 95.731025, 'lines_per_mm': 618.925978, 'aoi': 38.521868} using GenerationNode Sobol.
+1
+Submitted batch job 47838758
+SUCCESS
+[INFO 05-27 12:49:32] ax.api.client: Trial 1 marked COMPLETED.
+100%|██████████| 2/2 [03:00<00:00, 87.41s/it] 100%|██████████| 2/2 [03:00<00:00, 90.23s/it]
+<ax.core.analysis_card.ErrorAnalysisCard object at 0x14d912b14ce0>
+<ax.core.analysis_card.AnalysisCard object at 0x14d912a0f020>
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 69, in <module>
+    main(args)
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 59, in main
+    plot_reward(best_values, all_values, result_filename)
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/plotting.py", line 57, in plot_reward
+    plt.savefig(filepath)
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/pyplot.py", line 1134, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/figure.py", line 3390, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 2193, in print_figure
+    result = print_method(
+             ^^^^^^^^^^^^^
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 2043, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+                                                                 ^^^^^
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py", line 497, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py", line 446, in _print_pil
+    mpl.image.imsave(
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/image.py", line 1656, in imsave
+    image.save(fname, **pil_kwargs)
+  File "/apps/python/3.12/lib/python3.12/site-packages/PIL/Image.py", line 2456, in save
+    fp = builtins.open(filename, "w+b")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/fs/ess/PAS1730/GratingOptimization/GratingOpt/data/plots/trial_rewards.png'

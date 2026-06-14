@@ -1,0 +1,24 @@
+duty_cycle:
+  lb: 0.4
+  ub: 0.6
+  parameter_type: float
+
+pillar_thickness:
+  lb: 1200
+  ub: 1475
+  parameter_type: float
+
+#residual_thickness:
+#  lb: 90
+#  ub: 110
+#  parameter_type: float
+
+#lines_per_mm:
+#  lb: 550
+#  ub: 650
+#  parameter_type: float
+
+aoi:
+  lb: 34.36623   # [degrees]
+  ub: 42.00317    # [degrees]
+  parameter_type: float

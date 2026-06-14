@@ -1,0 +1,39 @@
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ python -u -m grating_opt.main
+[WARNING 05-28 17:01:26] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+[INFO 05-28 17:01:26] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 4 marked COMPLETED.
+/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/ax/api/client.py:575: RuntimeWarning:
+
+Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+
+[INFO 05-28 17:01:26] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 05-28 17:01:26] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 05-28 17:01:27] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 05-28 17:01:27] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 05-28 17:01:27] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 05-28 17:01:27] ax.api.client: Trial 13 marked COMPLETED.
+  0%|          | 0/20 [00:00<?, ?it/s][INFO 05-28 17:01:29] ax.api.client: Generated new trial 14 with parameters {'duty_cycle': 0.519912, 'pillar_thickness': 1423.507792, 'aoi': 37.367415} using GenerationNode UCB.
+[INFO 05-28 17:01:29] ax.api.client: Generated new trial 15 with parameters {'duty_cycle': 0.517295, 'pillar_thickness': 1461.063183, 'aoi': 36.281682} using GenerationNode UCB.
+14
+Submitted batch job 47863566
+SUCCESS
+14
+Submitted batch job 47863579
+SUCCESS
+[INFO 05-28 20:58:54] ax.api.client: Trial 14 marked COMPLETED.
+15
+Submitted batch job 47868455
+SUCCESS
+15
+Submitted batch job 47868463
+[2026-05-28T22:06:38.011] error: *** JOB 47863564 ON p0116 CANCELLED AT 2026-05-28T22:06:38 DUE TO TIME LIMIT ***

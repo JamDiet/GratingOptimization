@@ -1,0 +1,98 @@
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ python -u -m grating_opt.main
+[WARNING 06-10 13:00:01] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+[INFO 06-10 13:00:04] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 4 marked COMPLETED.
+/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/ax/api/client.py:575: RuntimeWarning:
+
+Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+
+[INFO 06-10 13:00:04] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 13 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 14 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 15 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 16 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 17 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 18 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 19 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 20 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 21 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 22 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 23 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 24 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 25 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 26 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 27 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 28 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 29 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 30 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 31 marked COMPLETED.
+[INFO 06-10 13:00:04] ax.api.client: Trial 32 marked COMPLETED.
+[INFO 06-10 13:00:05] ax.api.client: Trial 33 marked COMPLETED.
+  0%|          | 0/3 [00:00<?, ?it/s][INFO 06-10 13:00:07] ax.api.client: Generated new trial 34 with parameters {'duty_cycle': 0.594, 'pillar_thickness': 1475.0, 'aoi': 36.59924} using GenerationNode UCB.
+34
+Submitted batch job 48155330
+SUCCESS
+[INFO 06-10 13:01:54] ax.api.client: Trial 34 marked COMPLETED.
+ 33%|███▎      | 1/3 [01:49<03:38, 109.20s/it][INFO 06-10 13:01:55] ax.api.client: Generated new trial 35 with parameters {'duty_cycle': 0.517891, 'pillar_thickness': 1475.0, 'aoi': 36.607458} using GenerationNode UCB.
+35
+Submitted batch job 48155345
+SUCCESS
+35
+Submitted batch job 48155355
+SUCCESS
+[INFO 06-10 16:55:29] ax.api.client: Trial 35 marked COMPLETED.
+ 67%|██████▋   | 2/3 [3:55:24<2:18:09, 8289.41s/it][INFO 06-10 16:55:30] ax.api.client: Generated new trial 36 with parameters {'duty_cycle': 0.544577, 'pillar_thickness': 1475.0, 'aoi': 37.575888} using GenerationNode UCB.
+36
+Submitted batch job 48161804
+SUCCESS
+36
+Submitted batch job 48161816
+SUCCESS
+[INFO 06-10 20:30:16] ax.api.client: Trial 36 marked COMPLETED.
+100%|██████████| 3/3 [7:30:11<00:00, 10388.84s/it] 100%|██████████| 3/3 [7:30:11<00:00, 9003.97s/it] 
+<ax.analysis.plotly.plotly_analysis.PlotlyAnalysisCard object at 0x14aef75cbda0>
+<ax.core.analysis_card.AnalysisCard object at 0x14aef71f1d00>
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 81, in <module>
+    main(args)
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 71, in main
+    plot_reward_from_csv(full_path, result_filename)
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/plotting.py", line 98, in plot_reward_from_csv
+    plt.savefig(output_filepath)
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/pyplot.py", line 1134, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/figure.py", line 3390, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 2193, in print_figure
+    result = print_method(
+             ^^^^^^^^^^^^^
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 2043, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+                                                                 ^^^^^
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py", line 497, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py", line 446, in _print_pil
+    mpl.image.imsave(
+  File "/apps/python/3.12/lib/python3.12/site-packages/matplotlib/image.py", line 1656, in imsave
+    image.save(fname, **pil_kwargs)
+  File "/apps/python/3.12/lib/python3.12/site-packages/PIL/Image.py", line 2456, in save
+    fp = builtins.open(filename, "w+b")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/fs/ess/PAS1730/GratingOptimization/GratingOpt/data/plots/trial_rewards.png'

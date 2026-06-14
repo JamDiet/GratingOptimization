@@ -1,0 +1,30 @@
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ python -u -m grating_opt.main
+[WARNING 05-27 12:17:02] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+  0%|          | 0/2 [00:00<?, ?it/s][INFO 05-27 12:17:03] ax.api.client: Generated new trial 0 with parameters {'duty_cycle': 0.45262, 'pillar_thickness': 1321.745346, 'residual_thickness': 93.409505, 'lines_per_mm': 619.030493, 'aoi': 36.546018} using GenerationNode Sobol.
+0
+sbatch: error: Unable to open file ../../sub_RCWA.pbs
+  0%|          | 0/2 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 69, in <module>
+    main(args)
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/main.py", line 36, in main
+    client, best_values, all_values = opt.optimize_params(
+                                      ^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/optimizer.py", line 109, in optimize_params
+    res = func(
+          ^^^^^
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/simulation_calls.py", line 63, in call_simulations
+    res_rcwa = run_rcwa(trial, params, local)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src/grating_opt/SA_RCWA.py", line 53, in run_rcwa
+    subprocess.run(cmd, shell=True, check=True) #Switch to subprocess
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/apps/python/3.12/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'sbatch --wait ../../sub_RCWA.pbs' returned non-zero exit status 1.

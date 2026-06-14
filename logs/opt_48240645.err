@@ -1,0 +1,90 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+rsync: [sender] change_dir "/users/PAS1730/johnnyeschbach/.matlab" failed: No such file or directory (2)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1327) [sender=3.2.5]
+[INFO 06-13 19:47:49] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 4 marked COMPLETED.
+/fs/ess/PAS1730/Johnny/GratingOptimization/GratingOpt/venv/lib/python3.12/site-packages/ax/api/client.py:610: RuntimeWarning: Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+  _, trial_index = self._experiment.attach_trial(
+[INFO 06-13 19:47:49] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 13 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 14 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 15 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 16 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 17 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 18 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 19 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 20 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 21 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 22 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 23 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 24 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 25 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 26 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 27 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 28 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 29 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 30 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 31 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 32 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 33 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 34 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 35 marked COMPLETED.
+[INFO 06-13 19:47:49] ax.api.client: Trial 36 marked COMPLETED.
+[INFO 06-13 19:47:49] Orchestrator: `Orchestrator` requires experiment to have immutable search space and optimization config. Setting property immutable_search_space_and_opt_config to `True` on experiment.
+[INFO 06-13 19:47:52] Orchestrator: Running trials [37]...
+srun: warning: can't run 1 processes on 2 nodes, setting nnodes to 1
+License checkout failed.
+License Manager Error -39
+User/host not on INCLUDE list for MATLAB. 
+Contact your License Administrator to review the Options File.
+
+Troubleshoot this issue by visiting: 
+https://www.mathworks.com/support/lme/39
+
+Diagnostic Information:
+Feature: MATLAB 
+License path: /users/PAS1730/johnnyeschbach/.matlab/R2024a_licenses:/apps/matlab/r2024a/licenses/license.dat:/apps/matlab/r2024a/licenses/network.lic 
+Licensing error: -39,147.
+srun: error: p0211: task 0: Exited with exit code 1
+[INFO 06-13 19:48:00] Orchestrator: Running trials [38]...
+srun: warning: can't run 1 processes on 2 nodes, setting nnodes to 1
+[INFO 06-13 19:48:01] Orchestrator: Waiting for completed trials (for 30 sec, currently running trials: 2).
+License checkout failed.
+License Manager Error -39
+User/host not on INCLUDE list for MATLAB. 
+Contact your License Administrator to review the Options File.
+
+Troubleshoot this issue by visiting: 
+https://www.mathworks.com/support/lme/39
+
+Diagnostic Information:
+Feature: MATLAB 
+License path: /users/PAS1730/johnnyeschbach/.matlab/R2024a_licenses:/apps/matlab/r2024a/licenses/license.dat:/apps/matlab/r2024a/licenses/network.lic 
+Licensing error: -39,147.
+srun: error: p0212: task 0: Exited with exit code 1
+[INFO 06-13 19:48:31] Orchestrator: Waiting for completed trials (for 45 sec, currently running trials: 2).
+[INFO 06-13 19:49:16] Orchestrator: Waiting for completed trials (for 67 sec, currently running trials: 2).
+[INFO 06-13 19:50:24] Orchestrator: Waiting for completed trials (for 101 sec, currently running trials: 2).
+[INFO 06-13 19:52:05] Orchestrator: Waiting for completed trials (for 151 sec, currently running trials: 2).
+[INFO 06-13 19:54:37] Orchestrator: Waiting for completed trials (for 227 sec, currently running trials: 2).
+[INFO 06-13 19:58:25] Orchestrator: Waiting for completed trials (for 341 sec, currently running trials: 2).
+[INFO 06-13 20:04:06] Orchestrator: Waiting for completed trials (for 30 sec, currently running trials: 2).
+[INFO 06-13 20:04:36] Orchestrator: Waiting for completed trials (for 45 sec, currently running trials: 2).
+[INFO 06-13 20:05:21] Orchestrator: Waiting for completed trials (for 67 sec, currently running trials: 2).
+[INFO 06-13 20:06:29] Orchestrator: Waiting for completed trials (for 101 sec, currently running trials: 2).
+[INFO 06-13 20:08:10] Orchestrator: Waiting for completed trials (for 151 sec, currently running trials: 2).
+[INFO 06-13 20:10:42] Orchestrator: Waiting for completed trials (for 227 sec, currently running trials: 2).
+[INFO 06-13 20:14:30] Orchestrator: Waiting for completed trials (for 341 sec, currently running trials: 2).
+[INFO 06-13 20:20:12] Orchestrator: Waiting for completed trials (for 30 sec, currently running trials: 2).
+[INFO 06-13 20:20:42] Orchestrator: Waiting for completed trials (for 45 sec, currently running trials: 2).
+[INFO 06-13 20:21:27] Orchestrator: Waiting for completed trials (for 67 sec, currently running trials: 2).

@@ -1,0 +1,133 @@
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ python -u -m grating_opt.main
+[WARNING 05-27 12:06:46] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+  0%|          | 0/2 [00:00<?, ?it/s][INFO 05-27 12:06:46] ax.api.client: Generated new trial 0 with parameters {'duty_cycle': 0.519233, 'pillar_thickness': 1268.255658, 'residual_thickness': 93.838856, 'lines_per_mm': 563.738216, 'aoi': 35.483381} using GenerationNode Sobol.
+0
+Period D          = 1.587302 um
+Bottom width w_b  = 0.824179 um
+Top width w_t     = 0.824179 um
+Residual e        = 0.206744 um
+Pillar height h   = 1.268256 um
+[Warning: MATLAB has disabled some advanced graphics rendering features by
+switching to software OpenGL. For more information, click <a
+href="matlab:opengl('problems')">here</a>.] 
+ 
+incident from top
+ top:     0.96332    0.035723  
+ bottom:     0.00043532  0.00052066  
+At LD = 1.950000 um:
+R = 0.99904403
+T = 0.00095597
+A = 0.00000000
+R+T+A = 1.00000000
+ 
+Top incidence -> reflected propagating orders
+    Order    Theta_calc_deg    Theta_solver_deg    Efficiency
+    _____    ______________    ________________    __________
+
+     -1         -40.393            -40.393           0.96332 
+      0          35.483             35.483          0.035723 
+
+ 
+Top incidence -> transmitted propagating orders
+    Order    Theta_calc_deg    Theta_solver_deg    Efficiency
+    _____    ______________    ________________    __________
+
+     -1         -26.546            -26.546         0.00043532
+      0          23.598             23.598         0.00052066
+
+LD = 1.8500 um, R = 0.994985, T = 0.005015, A = 0.000000, DE(-1) = 0.873241
+LD = 1.8605 um, R = 0.996346, T = 0.003654, A = 0.000000, DE(-1) = 0.904418
+LD = 1.8711 um, R = 0.997232, T = 0.002768, A = 0.000000, DE(-1) = 0.929941
+LD = 1.8816 um, R = 0.997828, T = 0.002172, A = -0.000000, DE(-1) = 0.949805
+LD = 1.8921 um, R = 0.998239, T = 0.001761, A = -0.000000, DE(-1) = 0.964171
+LD = 1.9026 um, R = 0.998527, T = 0.001473, A = -0.000000, DE(-1) = 0.973351
+LD = 1.9132 um, R = 0.998730, T = 0.001270, A = 0.000000, DE(-1) = 0.977769
+LD = 1.9237 um, R = 0.998873, T = 0.001127, A = -0.000000, DE(-1) = 0.977931
+LD = 1.9342 um, R = 0.998968, T = 0.001032, A = -0.000000, DE(-1) = 0.974384
+LD = 1.9447 um, R = 0.999027, T = 0.000973, A = 0.000000, DE(-1) = 0.967685
+LD = 1.9553 um, R = 0.999053, T = 0.000947, A = -0.000000, DE(-1) = 0.958367
+LD = 1.9658 um, R = 0.999050, T = 0.000950, A = -0.000000, DE(-1) = 0.946917
+LD = 1.9763 um, R = 0.999014, T = 0.000986, A = -0.000000, DE(-1) = 0.933750
+LD = 1.9868 um, R = 0.998943, T = 0.001057, A = -0.000000, DE(-1) = 0.919195
+LD = 1.9974 um, R = 0.998828, T = 0.001172, A = -0.000000, DE(-1) = 0.903478
+LD = 2.0079 um, R = 0.998655, T = 0.001345, A = -0.000000, DE(-1) = 0.886707
+LD = 2.0184 um, R = 0.998402, T = 0.001598, A = -0.000000, DE(-1) = 0.868852
+LD = 2.0289 um, R = 0.998032, T = 0.001968, A = 0.000000, DE(-1) = 0.849728
+LD = 2.0395 um, R = 0.997484, T = 0.002516, A = -0.000000, DE(-1) = 0.828962
+LD = 2.0500 um, R = 0.996653, T = 0.003347, A = -0.000000, DE(-1) = 0.805944
+ 
+Saved wavelength sweep result to DE_vs_wavelength.csv
+SUCCESS
+[INFO 05-27 12:07:38] ax.api.client: Trial 0 marked COMPLETED.
+ 50%|█████     | 1/2 [00:51<00:51, 51.29s/it][INFO 05-27 12:07:38] ax.api.client: Generated new trial 1 with parameters {'duty_cycle': 0.459606, 'pillar_thickness': 1438.001276, 'residual_thickness': 106.780255, 'lines_per_mm': 626.236205, 'aoi': 39.966156} using GenerationNode Sobol.
+1
+Period D          = 1.587302 um
+Bottom width w_b  = 0.729533 um
+Top width w_t     = 0.729533 um
+Residual e        = 0.036999 um
+Pillar height h   = 1.438001 um
+[Warning: MATLAB has disabled some advanced graphics rendering features by
+switching to software OpenGL. For more information, click <a
+href="matlab:opengl('problems')">here</a>.] 
+ 
+incident from top
+ top:     0.9368    0.062366  
+ bottom:     0.00053272  0.00030343  
+At LD = 1.950000 um:
+R = 0.99916385
+T = 0.00083615
+A = 0.00000000
+R+T+A = 1.00000000
+ 
+Top incidence -> reflected propagating orders
+    Order    Theta_calc_deg    Theta_solver_deg    Efficiency
+    _____    ______________    ________________    __________
+
+     -1         -35.885            -35.885            0.9368 
+      0          39.966             39.966          0.062366 
+
+ 
+Top incidence -> transmitted propagating orders
+    Order    Theta_calc_deg    Theta_solver_deg    Efficiency
+    _____    ______________    ________________    __________
+
+     -1         -23.844            -23.844         0.00053272
+      0          26.295             26.295         0.00030343
+
+LD = 1.8500 um, R = 0.992988, T = 0.007012, A = -0.000000, DE(-1) = 0.845483
+LD = 1.8605 um, R = 0.995650, T = 0.004350, A = -0.000000, DE(-1) = 0.879447
+LD = 1.8711 um, R = 0.997062, T = 0.002938, A = -0.000000, DE(-1) = 0.900069
+LD = 1.8816 um, R = 0.997872, T = 0.002128, A = -0.000000, DE(-1) = 0.912911
+LD = 1.8921 um, R = 0.998364, T = 0.001636, A = 0.000000, DE(-1) = 0.920998
+LD = 1.9026 um, R = 0.998677, T = 0.001323, A = -0.000000, DE(-1) = 0.926130
+LD = 1.9132 um, R = 0.998881, T = 0.001119, A = -0.000000, DE(-1) = 0.929468
+LD = 1.9237 um, R = 0.999015, T = 0.000985, A = -0.000000, DE(-1) = 0.931810
+LD = 1.9342 um, R = 0.999101, T = 0.000899, A = -0.000000, DE(-1) = 0.933741
+LD = 1.9447 um, R = 0.999150, T = 0.000850, A = 0.000000, DE(-1) = 0.935699
+LD = 1.9553 um, R = 0.999171, T = 0.000829, A = -0.000000, DE(-1) = 0.938024
+LD = 1.9658 um, R = 0.999165, T = 0.000835, A = -0.000000, DE(-1) = 0.940970
+LD = 1.9763 um, R = 0.999134, T = 0.000866, A = -0.000000, DE(-1) = 0.944718
+LD = 1.9868 um, R = 0.999075, T = 0.000925, A = 0.000000, DE(-1) = 0.949368
+LD = 1.9974 um, R = 0.998982, T = 0.001018, A = 0.000000, DE(-1) = 0.954934
+LD = 2.0079 um, R = 0.998847, T = 0.001153, A = 0.000000, DE(-1) = 0.961317
+LD = 2.0184 um, R = 0.998655, T = 0.001345, A = -0.000000, DE(-1) = 0.968288
+LD = 2.0289 um, R = 0.998386, T = 0.001614, A = 0.000000, DE(-1) = 0.975443
+LD = 2.0395 um, R = 0.998006, T = 0.001994, A = 0.000000, DE(-1) = 0.982171
+LD = 2.0500 um, R = 0.997465, T = 0.002535, A = -0.000000, DE(-1) = 0.987611
+ 
+Saved wavelength sweep result to DE_vs_wavelength.csv
+SUCCESS
+1
+
+ans =
+
+     1
+
+[Warning: MATLAB has disabled some advanced graphics rendering features by
+switching to software OpenGL. For more information, click <a
+href="matlab:opengl('problems')">here</a>.] 
+[2026-05-27T12:08:57.430] error: Detected 4 oom_kill events in StepId=47837718.batch. Some of the step tasks have been OOM Killed.

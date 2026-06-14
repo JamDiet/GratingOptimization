@@ -1,0 +1,188 @@
+
+Lmod is automatically replacing "mvapich/4.1" with
+"intel-oneapi-mpi/2021.10.0".
+
++ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
++ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
++ srun python -u -m grating_opt.main
+[WARNING 06-01 20:41:47] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+[WARNING 06-01 20:41:47] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+[WARNING 06-01 20:41:47] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+[WARNING 06-01 20:41:47] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
+[INFO 06-01 20:41:49] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 0 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 1 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 2 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 3 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 4 marked COMPLETED.
+/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/ax/api/client.py:575: RuntimeWarning:
+
+Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+
+[INFO 06-01 20:41:49] ax.api.client: Trial 4 marked COMPLETED.
+/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/ax/api/client.py:575: RuntimeWarning:
+
+Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+
+[INFO 06-01 20:41:49] ax.api.client: Trial 4 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 4 marked COMPLETED.
+/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/ax/api/client.py:575: RuntimeWarning:
+
+Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+
+/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/ax/api/client.py:575: RuntimeWarning:
+
+Parameterization {'duty_cycle': 0.458601515, 'pillar_thickness': 1512.369564, 'aoi': 38.47485929} is in out-of-design. Ax will still attach the trial for use in candidate generation.
+
+[INFO 06-01 20:41:49] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 5 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 6 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 7 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 8 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 9 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 10 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 11 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 12 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 13 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 13 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 13 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 13 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 14 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 14 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 14 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 14 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 15 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 15 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 15 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 15 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 16 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 16 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 16 marked COMPLETED.
+[INFO 06-01 20:41:49] ax.api.client: Trial 16 marked COMPLETED.
+  0%|          | 0/10 [00:00<?, ?it/s][INFO 06-01 20:41:52] ax.api.client: Generated new trial 17 with parameters {'duty_cycle': 0.483141, 'pillar_thickness': 1319.531007, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 18 with parameters {'duty_cycle': 0.480207, 'pillar_thickness': 1318.926957, 'aoi': 39.643977} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 19 with parameters {'duty_cycle': 0.483253, 'pillar_thickness': 1311.68747, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 20 with parameters {'duty_cycle': 0.481652, 'pillar_thickness': 1324.436903, 'aoi': 42.00317} using GenerationNode UCB.
+MPI startup(): unsupported scenario. mlx provider does not support Spawns by default, please set I_MPI_SPAWN=on.
+
+Exception in thread Thread-2 (_manager_spawn):
+Traceback (most recent call last):
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 353, in _manager_spawn
+    comm = serialized(client_spawn)(pyexe, pyargs, nprocs, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 1067, in client_spawn
+    comm = MPI.COMM_SELF.Spawn(python_exe, args, max_workers, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/mpi4py/MPI.src/Comm.pyx", line 2560, in mpi4py.MPI.Intracomm.Spawn
+mpi4py.MPI.Exception: Other MPI error, error stack:
+PMPI_Comm_spawn(137).........: MPI_Comm_spawn(cmd="/apps/python/3.12/bin/python", argv=0x14b930031c50, maxprocs=4, info=0x9c000000, root=0, MPI_COMM_SELF, intercomm=0x14b9300319a0, errors=(nil)) failed
+MPID_Comm_spawn_multiple(130): Error in spawn call
+  0%|          | 0/10 [00:00<?, ?it/s][INFO 06-01 20:41:52] ax.api.client: Generated new trial 17 with parameters {'duty_cycle': 0.483144, 'pillar_thickness': 1319.527511, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 18 with parameters {'duty_cycle': 0.480397, 'pillar_thickness': 1318.968022, 'aoi': 39.788639} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 19 with parameters {'duty_cycle': 0.48271, 'pillar_thickness': 1312.785433, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 20 with parameters {'duty_cycle': 0.479072, 'pillar_thickness': 1310.608712, 'aoi': 38.324294} using GenerationNode UCB.
+MPI startup(): unsupported scenario. mlx provider does not support Spawns by default, please set I_MPI_SPAWN=on.
+
+Exception in thread Thread-2 (_manager_spawn):
+Traceback (most recent call last):
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 353, in _manager_spawn
+    comm = serialized(client_spawn)(pyexe, pyargs, nprocs, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 1067, in client_spawn
+    comm = MPI.COMM_SELF.Spawn(python_exe, args, max_workers, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/mpi4py/MPI.src/Comm.pyx", line 2560, in mpi4py.MPI.Intracomm.Spawn
+mpi4py.MPI.Exception: Other MPI error, error stack:
+PMPI_Comm_spawn(137).........: MPI_Comm_spawn(cmd="/apps/python/3.12/bin/python", argv=0x146eb04c9c10, maxprocs=4, info=0x9c000000, root=0, MPI_COMM_SELF, intercomm=0x146eb04ca060, errors=(nil)) failed
+MPID_Comm_spawn_multiple(130): Error in spawn call
+  0%|          | 0/10 [00:00<?, ?it/s][INFO 06-01 20:41:52] ax.api.client: Generated new trial 17 with parameters {'duty_cycle': 0.483146, 'pillar_thickness': 1319.525813, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 18 with parameters {'duty_cycle': 0.480263, 'pillar_thickness': 1319.063568, 'aoi': 39.74314} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 19 with parameters {'duty_cycle': 0.483819, 'pillar_thickness': 1312.881949, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 20 with parameters {'duty_cycle': 0.480109, 'pillar_thickness': 1328.279488, 'aoi': 40.057489} using GenerationNode UCB.
+MPI startup(): unsupported scenario. mlx provider does not support Spawns by default, please set I_MPI_SPAWN=on.
+
+Exception in thread Thread-2 (_manager_spawn):
+Traceback (most recent call last):
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 353, in _manager_spawn
+    comm = serialized(client_spawn)(pyexe, pyargs, nprocs, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 1067, in client_spawn
+    comm = MPI.COMM_SELF.Spawn(python_exe, args, max_workers, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/mpi4py/MPI.src/Comm.pyx", line 2560, in mpi4py.MPI.Intracomm.Spawn
+mpi4py.MPI.Exception: Other MPI error, error stack:
+PMPI_Comm_spawn(137).........: MPI_Comm_spawn(cmd="/apps/python/3.12/bin/python", argv=0x152b280ada90, maxprocs=4, info=0x9c000000, root=0, MPI_COMM_SELF, intercomm=0x152b280ae360, errors=(nil)) failed
+MPID_Comm_spawn_multiple(130): Error in spawn call
+  0%|          | 0/10 [00:00<?, ?it/s][INFO 06-01 20:41:52] ax.api.client: Generated new trial 17 with parameters {'duty_cycle': 0.483143, 'pillar_thickness': 1319.528332, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 18 with parameters {'duty_cycle': 0.480332, 'pillar_thickness': 1319.071546, 'aoi': 39.793277} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 19 with parameters {'duty_cycle': 0.482506, 'pillar_thickness': 1312.143124, 'aoi': 42.00317} using GenerationNode UCB.
+[INFO 06-01 20:41:52] ax.api.client: Generated new trial 20 with parameters {'duty_cycle': 0.482862, 'pillar_thickness': 1327.694757, 'aoi': 42.00317} using GenerationNode UCB.
+MPI startup(): unsupported scenario. mlx provider does not support Spawns by default, please set I_MPI_SPAWN=on.
+
+Exception in thread Thread-2 (_manager_spawn):
+Traceback (most recent call last):
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/apps/python/3.12/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 353, in _manager_spawn
+    comm = serialized(client_spawn)(pyexe, pyargs, nprocs, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/users/PAS1730/ziyaosu816/.local/lib/python3.12/site-packages/mpi4py/futures/_core.py", line 1067, in client_spawn
+    comm = MPI.COMM_SELF.Spawn(python_exe, args, max_workers, info)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/mpi4py/MPI.src/Comm.pyx", line 2560, in mpi4py.MPI.Intracomm.Spawn
+mpi4py.MPI.Exception: Other MPI error, error stack:
+PMPI_Comm_spawn(137).........: MPI_Comm_spawn(cmd="/apps/python/3.12/bin/python", argv=0x145ff094dc30, maxprocs=4, info=0x9c000000, root=0, MPI_COMM_SELF, intercomm=0x145ff094d040, errors=(nil)) failed
+MPID_Comm_spawn_multiple(130): Error in spawn call
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-06-01T20:48:51.395] error: *** JOB 47947487 ON p0011 CANCELLED AT 2026-06-01T20:48:51 DUE to SIGNAL Terminated ***
+[2026-06-01T20:48:51.395] error: *** STEP 47947487.0 ON p0011 CANCELLED AT 2026-06-01T20:48:51 DUE to SIGNAL Terminated ***

@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --time=04:05:00
+#SBATCH --nodes=1 --ntasks-per-node=1
+#SBATCH --mem=100G
+#SBATCH --account=PAS1730
+
+module load matlab/r2024a
+
+
+set -x
+cd $SLURM_SUBMIT_DIR
+
+
+
+matlab -nodisplay -nodesktop < <sim_file>

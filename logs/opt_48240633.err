@@ -1,0 +1,4 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+rsync: [sender] change_dir "/users/PAS1730/johnnyeschbach/.matlab" failed: No such file or directory (2)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1327) [sender=3.2.5]
+/fs/ess/PAS1730/Johnny/GratingOptimization/GratingOpt/venv/bin/python: Error while finding module specification for 'src.grating_opt.main_async.py' (ModuleNotFoundError: __path__ attribute not found on 'src.grating_opt.main_async' while trying to find 'src.grating_opt.main_async.py'). Try using 'src.grating_opt.main_async' instead of 'src.grating_opt.main_async.py' as the module name.
