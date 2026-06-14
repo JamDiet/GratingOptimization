@@ -1,6 +1,7 @@
 venv/
 lib/
 Results/
+logs/
 
 *.csv
 *.pyc

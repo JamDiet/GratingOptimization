@@ -41,7 +41,7 @@ def run_both(trial: int, params: dict):
     newcode = newcode.replace("<trial>",str(trial))
     newcode = newcode.replace("<result_fdtd>", result_fdtd)
 
-    FDTD_file = f'code_fdtd_{trial}.m'
+    FDTD_file = f'{trial_dir}/code_fdtd_{trial}.m'
 
     f = open(FDTD_file,'w',encoding='utf-8')
     f.write(newcode)
