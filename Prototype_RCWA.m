@@ -2,7 +2,7 @@ clear; clc; close all;
 
 
 %% Setup paths
-projectRoot = '/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/RCWA';
+projectRoot = '/fs/ess/PAS1730/RCWA';
 addpath(genpath(fullfile(projectRoot, 'RCWA')));
 
 % =========================================================

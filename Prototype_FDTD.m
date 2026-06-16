@@ -83,7 +83,7 @@ maxNumCompThreads(cN)
 
 
 %% Setup paths
-projectRoot = '/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/FDTD';
+projectRoot = '/fs/ess/PAS1730/FDTD';
 
 addpath(genpath(fullfile(projectRoot, 'Functions')));
 addpath(genpath(fullfile(projectRoot, 'Classes')));

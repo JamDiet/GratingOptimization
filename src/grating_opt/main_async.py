@@ -47,6 +47,8 @@ def main(args):
         preexisting_trials=preexisting_trials
     )
 
+    utils.save_client_data(client, csv_filename)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

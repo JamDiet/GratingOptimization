@@ -59,7 +59,7 @@ def run_both(trial: int, params: dict):
     newcode = newcode.replace("<result_rcwa>", result_rcwa)
     newcode = newcode.replace("<DE_filename>", DE_filename)
 
-    RCWA_file = f'code_rcwa_{trial}.m'
+    RCWA_file = f'{trial_dir}/code_rcwa_{trial}.m'
 
     f = open(RCWA_file,'w',encoding='utf-8')
     f.write(newcode)

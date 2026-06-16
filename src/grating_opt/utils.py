@@ -3,6 +3,7 @@ from pathlib import Path
 from ax.api.configs import RangeParameterConfig
 import pandas as pd
 from ax.api.client import Client
+from ax.service.utils.report_utils import exp_to_df
 
 _yaml = YAML(typ='safe')
 
@@ -97,3 +98,16 @@ def query_surrogate(client: Client, params: dict):
     :rtype: list
     """
     return client.predict(params)
+
+
+def save_client_data(client: Client, filename: str):
+    full_path = get_data_root() / "csvs" / filename
+
+    # client.get_trials_data_frame() aggregates parameters and metrics
+    df_step = exp_to_df(client._experiment)
+    
+    # Ensure the target directory exists before writing
+    full_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Overwrite the CSV with all trials (mode='w' is default, header is always True)
+    df_step.to_csv(full_path, mode='w', index=False, header=True)
