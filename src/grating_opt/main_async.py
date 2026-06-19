@@ -44,10 +44,9 @@ def main(args):
         seed_trials=seed_trials,
         kappa=kappa,
         parallelism=parallelism,
-        preexisting_trials=preexisting_trials
+        preexisting_trials=preexisting_trials,
+        csv_filename=csv_filename
     )
-
-    utils.save_client_data(client, csv_filename)
 
 
 if __name__ == '__main__':

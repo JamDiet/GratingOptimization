@@ -660,8 +660,8 @@ for t = 1:Tsteps
 
     % Save data
     if mod(t,1200) == 0
-    %csvwrite([path,'ne_nm^3_',num2str(dt*t),'fs.csv'],nCBefilm);
-    %csvwrite([path,'Emax_Vnm_',num2str(dt*t),'fs.csv'],Emax);
+    csvwrite([path,'ne_nm^3_',num2str(dt*t),'fs.csv'],nCBefilm);
+    csvwrite([path,'Emax_Vnm_',num2str(dt*t),'fs.csv'],Emax);
     %csvwrite([path,'wcol_fs^-1_',num2str(dt*t),'fs.csv'],wcolfilm);
     %csvwrite([path,'wpho_fs^-1_',num2str(dt*t),'fs.csv'],wphofilm);
     %csvwrite([path,'Gamma_fs^-1_',num2str(dt*t),'fs.csv'],Gammafilm);

@@ -20,5 +20,5 @@ pillar_thickness:
 
 aoi:
   lb: 34.36623   # [degrees]
-  ub: 42.00317    # [degrees]
+  ub: 40.5    # [degrees]
   parameter_type: float

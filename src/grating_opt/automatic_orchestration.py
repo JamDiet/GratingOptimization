@@ -7,6 +7,7 @@ from ax.api.protocols.runner import IRunner, TrialStatus
 from ax.api.types import TParameterization
 
 from src.grating_opt.simulation_calls import call_sims_async, call_on_same_node, Result
+from src.grating_opt.utils import save_trial_data
 
 
 class Runner(IRunner):
@@ -18,11 +19,15 @@ class Runner(IRunner):
         self, trial_index: int, parameterization: TParameterization
     ) -> dict[str, Any]:
         
-        return call_on_same_node(
+        res = call_on_same_node(
             trial=trial_index,
             params=parameterization,
             local=self.local
         )
+
+        res["params"] = parameterization
+        
+        return res
 
     def poll_trial(
         self, trial_index: int, trial_metadata: Mapping[str, Any]
@@ -51,6 +56,7 @@ class Metric(IMetric):
             b: float,
             c: float,
             crit_ne: float,
+            csv_filename: str,
             include_penalties: bool=False,
             DE_col: str=None,
             wavelength_col: str=None,
@@ -63,6 +69,7 @@ class Metric(IMetric):
         self.b = b
         self.c = c
         self.crit_ne = crit_ne
+        self.csv_filename = csv_filename
         self.include_penalties = include_penalties
         self.DE_col = DE_col
         self.wavelength_col = wavelength_col
@@ -96,6 +103,13 @@ class Metric(IMetric):
             wavelength_col=self.wavelength_col,
             trial_idx=trial_index,
             comp_wavelength=self.comp_wavelength
+        )
+
+        save_trial_data(
+            trial_index=trial_index,
+            reward=reward,
+            params=trial_metadata["params"],
+            filename=self.csv_filename
         )
 
         return (0, reward)

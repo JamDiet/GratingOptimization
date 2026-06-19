@@ -38,7 +38,6 @@ def run_both(trial: int, params: dict):
     newcode = inputFile.replace("<aoi>",str(aoi))		
     newcode = newcode.replace("<dc>",str(dc))
     newcode = newcode.replace("<tp>",str(tp))
-    newcode = newcode.replace("<trial>",str(trial))
     newcode = newcode.replace("<result_fdtd>", result_fdtd)
 
     FDTD_file = f'{trial_dir}/code_fdtd_{trial}.m'
@@ -55,7 +54,6 @@ def run_both(trial: int, params: dict):
     newcode = inputFile.replace("<aoi>",str(aoi))        
     newcode = newcode.replace("<dc>",str(dc))
     newcode = newcode.replace("<tp>",str(tp))
-    newcode = newcode.replace("<trial>",str(trial))
     newcode = newcode.replace("<result_rcwa>", result_rcwa)
     newcode = newcode.replace("<DE_filename>", DE_filename)
 
@@ -72,8 +70,8 @@ def run_both(trial: int, params: dict):
     # This guarantees that the 'salloc' step picks ONE node from your pool, 
     # and both srun commands execute inside that exact same picked node.
     cluster_cmd = (
-        f"srun --ntasks=1 --cpus-per-task=40 --mpi=none matlab -batch \"run('{FDTD_file}')\" && "
-        f"srun --ntasks=1 --cpus-per-task=1 --mpi=none matlab -batch \"run('{RCWA_file}')\""
+        f"srun --ntasks=1 --cpus-per-task=1 --mpi=none matlab -batch \"run('{RCWA_file}')\" && "
+        f"srun --ntasks=1 --cpus-per-task=40 --mpi=none matlab -batch \"run('{FDTD_file}')\""
     )
     subprocess.Popen(cluster_cmd, shell=True)
     

@@ -111,3 +111,20 @@ def save_client_data(client: Client, filename: str):
     
     # Overwrite the CSV with all trials (mode='w' is default, header is always True)
     df_step.to_csv(full_path, mode='w', index=False, header=True)
+
+
+def save_trial_data(trial_index: int, reward: float, params: dict, filename: str):
+    full_path = get_data_root() / "csvs" / filename
+
+    # Create a DataFrame for the new trial data
+    trial_data = {"trial_index": trial_index, "reward": reward, **params}
+    df_trial = pd.DataFrame([trial_data])
+
+    # Ensure the target directory exists before writing
+    full_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Append the new trial data to the CSV file
+    if full_path.exists():
+        df_trial.to_csv(full_path, mode='a', index=False, header=False)
+    else:
+        df_trial.to_csv(full_path, mode='w', index=False, header=True)

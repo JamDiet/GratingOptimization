@@ -49,7 +49,7 @@ class Result:
             penalties = 0
 
         if all(v is not None for v in [filename, DE_col, wavelength_col, trial_idx]):
-            peak_wavelength = self.get_peak_wavelength(filename, DE_col, wavelength_col, trial_idx)
+            peak_wavelength = self.get_peak_wavelength(filename, DE_col, wavelength_col)
             penalties += 0.3 * abs(peak_wavelength - comp_wavelength) / 100
 
         return main_term - penalties

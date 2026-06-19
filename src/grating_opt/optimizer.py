@@ -218,6 +218,7 @@ class Optimizer:
             kappa: float=2.0,
             parallelism: int=1,
             preexisting_trials: list=None,
+            csv_filename: str=None
     ):
         """
         Asynchronous version of optimize_params. Trials are submitted to the cluster and then polled for completion.
@@ -233,6 +234,8 @@ class Optimizer:
         :type parallelism: int
         :param preexisting_trials: List of tuples containing (parameters, data) for pre-existing trials
         :type preexisting_trials: list
+        :param csv_filename: Name of CSV file to save trial data (will be placed in data/csvs directory)
+        :type csv_filename: str
         :return: The Ax client used for the optimization
         :rtype: ax.api.client.Client
         """
@@ -244,6 +247,7 @@ class Optimizer:
             b=self.b,
             c=self.c,
             crit_ne=self.crit_ne,
+            csv_filename=csv_filename,
             include_penalties=False,
             DE_col=self.DE_col,
             wavelength_col=self.wavelength_col,
