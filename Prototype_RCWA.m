@@ -28,12 +28,12 @@ beta0 = nAir * sind(teta0);
 % -------------------------
 % geometry from paper
 % -------------------------
-D   = 1.587301587;       % period, um
+D   = 1000/<lmm>;       % period, um
 h   = <tp>/1000;       % grating pillar height, um
 w_b = D*<dc>;       % pillar bottom width, um
 
-e   = 1.475-h;       % residual thickness, um
-phi = 90;        % sidewall angle, measured from horizontal/base plane
+e   = <tr>/1000;       % residual thickness, um
+phi = <sa>;        % sidewall angle, measured from horizontal/base plane
 
 % linewidth at top
 dx_one_side = h / tand(phi);
@@ -394,6 +394,6 @@ disp('Saved wavelength sweep result to DE_vs_wavelength.csv');
 % =========================================================
 % Save results for Python to read back
 % =========================================================
-rcwa_result = table(teta0, <tp>, <dc>, max(DE_m1), mean(DE_m1), ...
-    'VariableNames', {'aoi', 'tp', 'dc', 'DE_m1_peak', 'DE_m1_avg'});
+rcwa_result = table(teta0, <tp>, <dc>, <lmm>, <tr>, teta0, max(DE_m1), mean(DE_m1), ...
+    'VariableNames', {'aoi', 'tp', 'dc', 'lmm', 'tr', 'sa', 'DE_m1_peak', 'DE_m1_avg'});
 writetable(rcwa_result, '<result_rcwa>');

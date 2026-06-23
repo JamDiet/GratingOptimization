@@ -14,6 +14,9 @@ def run_both(trial: int, params: dict):
     aoi = params["aoi"]
     dc = params["duty_cycle"]
     tp = params["pillar_thickness"]
+    tr = params["residual_thickness"]
+    lmm = params["lines_per_mm"]
+    sa = params["slope_angle"]
 
     # Make result directories
     if not os.path.exists('Results'):
@@ -39,6 +42,9 @@ def run_both(trial: int, params: dict):
     newcode = newcode.replace("<dc>",str(dc))
     newcode = newcode.replace("<tp>",str(tp))
     newcode = newcode.replace("<result_fdtd>", result_fdtd)
+    newcode = newcode.replace("<tr>",str(tr))
+    newcode = newcode.replace("<lmm>",str(lmm))
+    newcode = newcode.replace("<sa>",str(sa))
 
     FDTD_file = f'{trial_dir}/code_fdtd_{trial}.m'
 
@@ -56,6 +62,9 @@ def run_both(trial: int, params: dict):
     newcode = newcode.replace("<tp>",str(tp))
     newcode = newcode.replace("<result_rcwa>", result_rcwa)
     newcode = newcode.replace("<DE_filename>", DE_filename)
+    newcode = newcode.replace("<tr>",str(tr))
+    newcode = newcode.replace("<lmm>",str(lmm))
+    newcode = newcode.replace("<sa>",str(sa))
 
     RCWA_file = f'{trial_dir}/code_rcwa_{trial}.m'
 

@@ -13,6 +13,9 @@ def run_rcwa(trial: int, params: dict, local: bool=True):
     aoi = params["aoi"]
     dc = params["duty_cycle"]
     tp = params["pillar_thickness"]
+    lmm = params["lines_per_mm"]
+    tr = params["residual_thickness"]
+    sa = params["slope_angle"]
 
     #Replace matlab code and copy here
     f = open('../' +prototype_code,'r')
@@ -23,6 +26,9 @@ def run_rcwa(trial: int, params: dict, local: bool=True):
     newcode = newcode.replace("<dc>",str(dc))
     newcode = newcode.replace("<tp>",str(tp))
     newcode = newcode.replace("<trial>",str(trial))
+    newcode = newcode.replace("<tr>",str(tr))
+    newcode = newcode.replace("<lmm>",str(lmm))
+    newcode = newcode.replace("<sa>",str(sa))
 
     sim_file = f'code_rcwa_{trial}.m'
 
@@ -51,6 +57,9 @@ def run_rcwa(trial: int, params: dict, local: bool=True):
             'aoi': res['aoi'] if res is not None else None,
             'tp': res['tp'] if res is not None else None,
             'dc': res['dc'] if res is not None else None,
+            'tr': res['tr'] if res is not None else None,
+            'lmm': res['lmm'] if res is not None else None,
+            'sa': res['sa'] if res is not None else None,
             'DE_m1_peak': res['DE_m1_peak'] if res is not None else None,
             'DE_m1_avg': res['DE_m1_avg'] if res is not None else None
         }

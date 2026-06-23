@@ -254,22 +254,23 @@ myTarget = Geometry(myGrid);
 
 % ---multilayer target---
 % material_ids = load('Inputs/types.txt');        
-material_thick  = load('Inputs/thicknesses2.txt');  % [nm]
+material_thick  = load('Inputs/thicknesses2_new.txt');  % [nm]
 material_thick  = flipud(material_thick)';
+material_ids = repmat([2 1], 1, 13); 
 
-material_ids = repmat([1 2], 1, 13); 
-% material_thick  = repmat([138 101], 1, 10);  % [nm]
 % % add other layers
-material_ids = [material_ids, 1];         % material ID
+top_thick = <tp> + <tr>;     % [nm]
+material_ids = [1, material_ids];         % material ID
+material_thick  = [top_thick, material_thick];
 
 material_thick_cell = round(material_thick / dy);  % [#]
 % ---grating target---
 duty_cycle = 1-<dc>;           % [#] duty cycle of the groove at the bottom
-lines_per_mm = 630;        % [#/mm] number of pillar lines per mm
+lines_per_mm = <lmm>;        % [#/mm] number of pillar lines per mm
 struc_period = 1e6 / lines_per_mm;            % [nm] structure period
 groove_width  = duty_cycle * struc_period;    % [nm] groove width
 pillar_depth = <tp>;           % [nm] pillar depth of the grating
-ita = 90;                % [#] pillar slope angle to the surface
+ita = <sa>;                % [#] pillar slope angle to the surface
 
 groove_period_cell = round(struc_period / dx); 
 groove_width_cell = round(groove_width / dx);  
@@ -689,6 +690,6 @@ end
 % =========================================================
 % Save results for Python to read back
 % =========================================================
-fdtd_result = table(aoi, pillar_depth, 1 - duty_cycle, max(max(nCBefilm)), ...
-    'VariableNames', {'aoi', 'tp', 'dc', 'ne_peak'});
+fdtd_result = table(aoi, pillar_depth, 1 - duty_cycle, lines_per_mm, ita, <tr>, ...
+    max(max(nCBefilm)), 'VariableNames', {'aoi', 'tp', 'dc', 'lmm', 'ita', 'tr', 'ne_peak'});
 writetable(fdtd_result, '<result_fdtd>');
