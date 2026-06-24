@@ -9,8 +9,8 @@ pillar_thickness:
   parameter_type: float
 
 residual_thickness:
- lb: 90
- ub: 110
+ lb: 0
+ ub: 200
  parameter_type: float
 
 lines_per_mm:
@@ -24,6 +24,6 @@ aoi:
   parameter_type: float
 
 slope_angle:
-  lb: 0.0   # [degrees]
-  ub: 5.0   # [degrees]
+  lb: 75.0   # [degrees]
+  ub: 90.0   # [degrees]
   parameter_type: float

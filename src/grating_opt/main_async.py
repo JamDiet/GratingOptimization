@@ -20,13 +20,14 @@ def main(args):
 
     # ======= Specify optimizer arguments ======= #
     # ============== MANUAL INPUT ============== #
-    num_trials = 10
+    num_trials = 30
     crit_ne = utils.calc_crit_ne(WAVELENGTH)
     seed_trials = 10
     kappa = 2.0
     local = False
     parallelism = int(os.environ.get("SLURM_JOB_NUM_NODES", 1))
-    preexisting_trials = utils.load_preexisting_trials(csv_filename)
+    # preexisting_trials = utils.load_preexisting_trials(csv_filename)
+    preexisting_trials = None
 
     # Initialize optimizer
     optimizer = opt.Optimizer(

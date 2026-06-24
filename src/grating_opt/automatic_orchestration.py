@@ -1,5 +1,6 @@
 import os
 from typing import Any, Mapping
+import numpy as np
 
 import pandas as pd
 from ax.api.protocols.metric import IMetric
@@ -19,6 +20,22 @@ class Runner(IRunner):
         self, trial_index: int, parameterization: TParameterization
     ) -> dict[str, Any]:
         
+        # Test against constraint
+        D = 1000 / parameterization["lines_per_mm"]
+        h = parameterization["pillar_thickness"] / 1000
+        w_b = D * parameterization["duty_cycle"] / 100
+        phi = parameterization["slope_angle"]
+        dx_one_side = h / np.tan(phi * np.pi / 180)
+
+        if w_b - 2*dx_one_side <= 0:
+            return {
+                "result_rcwa": None,
+                "result_fdtd": None,
+                "DE_filename": None,
+                "params": parameterization,
+                "reward": -10.
+            }
+        
         res = call_on_same_node(
             trial=trial_index,
             params=parameterization,
@@ -26,12 +43,16 @@ class Runner(IRunner):
         )
 
         res["params"] = parameterization
+        res["reward"] = None
         
         return res
 
     def poll_trial(
         self, trial_index: int, trial_metadata: Mapping[str, Any]
     ) -> TrialStatus:
+        if trial_metadata["reward"] is not None:
+            return TrialStatus.COMPLETED
+
         rcwa_res = trial_metadata["result_rcwa"]
         fdtd_res = trial_metadata["result_fdtd"]
 
@@ -80,6 +101,9 @@ class Metric(IMetric):
         trial_index: int,
         trial_metadata: Mapping[str, Any],
     ) -> tuple[int, float | tuple[float, float]]:
+        if trial_metadata["reward"] is not None:
+            return (0, trial_metadata["reward"])
+
         rcwa_res = trial_metadata["result_rcwa"]
         fdtd_res = trial_metadata["result_fdtd"]
         DE_filename = trial_metadata["DE_filename"]

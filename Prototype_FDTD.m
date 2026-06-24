@@ -101,7 +101,10 @@ mu0     = 1/c^2/ep0;        % vacuum permeability
 
 
 %% Create a Grid class (nx[#], ny[#], d[nm], T[fs])
-myGrid = Grid(2000, 1100, 12, 170);
+%myGrid = Grid(2000, 1100, 12, 170);
+
+% TEST
+myGrid = Grid(2000, 1100, 12, 10);
 
 nx   = myGrid.nx;
 ny   = myGrid.ny;
