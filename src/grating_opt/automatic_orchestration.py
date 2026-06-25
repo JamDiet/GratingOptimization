@@ -23,11 +23,12 @@ class Runner(IRunner):
         # Test against constraint
         D = 1000 / parameterization["lines_per_mm"]
         h = parameterization["pillar_thickness"] / 1000
-        w_b = D * parameterization["duty_cycle"] / 100
+        w_b = D * parameterization["duty_cycle"]
         phi = parameterization["slope_angle"]
         dx_one_side = h / np.tan(phi * np.pi / 180)
 
         if w_b - 2*dx_one_side <= 0:
+            print(f"Trial {trial_index}: Invalid geometry, skipping trial.")
             return {
                 "result_rcwa": None,
                 "result_fdtd": None,
@@ -102,32 +103,32 @@ class Metric(IMetric):
         trial_metadata: Mapping[str, Any],
     ) -> tuple[int, float | tuple[float, float]]:
         if trial_metadata["reward"] is not None:
-            return (0, trial_metadata["reward"])
+            reward = trial_metadata["reward"]
+        else:
+            rcwa_res = trial_metadata["result_rcwa"]
+            fdtd_res = trial_metadata["result_fdtd"]
+            DE_filename = trial_metadata["DE_filename"]
 
-        rcwa_res = trial_metadata["result_rcwa"]
-        fdtd_res = trial_metadata["result_fdtd"]
-        DE_filename = trial_metadata["DE_filename"]
+            rcwa_df = pd.read_csv(rcwa_res)
+            fdtd_df = pd.read_csv(fdtd_res)
 
-        rcwa_df = pd.read_csv(rcwa_res)
-        fdtd_df = pd.read_csv(fdtd_res)
+            res = Result(
+                norm_ne=fdtd_df['ne_peak'].iloc[0] / self.crit_ne,
+                peak_diff_eff=rcwa_df['DE_m1_peak'].iloc[0],
+                diff_eff_avg=rcwa_df['DE_m1_avg'].iloc[0]
+            )
 
-        res = Result(
-            norm_ne=fdtd_df['ne_peak'].iloc[0] / self.crit_ne,
-            peak_diff_eff=rcwa_df['DE_m1_peak'].iloc[0],
-            diff_eff_avg=rcwa_df['DE_m1_avg'].iloc[0]
-        )
-
-        reward = res.calc_reward(
-            a=self.a,
-            b=self.b,
-            c=self.c,
-            include_penalties=self.include_penalties,
-            filename=DE_filename,
-            DE_col=self.DE_col,
-            wavelength_col=self.wavelength_col,
-            trial_idx=trial_index,
-            comp_wavelength=self.comp_wavelength
-        )
+            reward = res.calc_reward(
+                a=self.a,
+                b=self.b,
+                c=self.c,
+                include_penalties=self.include_penalties,
+                filename=DE_filename,
+                DE_col=self.DE_col,
+                wavelength_col=self.wavelength_col,
+                trial_idx=trial_index,
+                comp_wavelength=self.comp_wavelength
+            )
 
         save_trial_data(
             trial_index=trial_index,

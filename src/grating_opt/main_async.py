@@ -20,7 +20,7 @@ def main(args):
 
     # ======= Specify optimizer arguments ======= #
     # ============== MANUAL INPUT ============== #
-    num_trials = 30
+    num_trials = 10
     crit_ne = utils.calc_crit_ne(WAVELENGTH)
     seed_trials = 10
     kappa = 2.0
