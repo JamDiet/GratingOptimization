@@ -1,93 +1,0 @@
-+ PROJECT_ROOT=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
-+ cd /users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt
-+ export PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
-+ PYTHONPATH=/users/PAS1730/ziyaosu816/Desktop/ProjectSpace/GratingOptimization/GratingOpt/src:
-+ python -u -m grating_opt.main
-[WARNING 05-27 17:57:36] ax.storage.sqa_store.with_db_settings_base: Ax currently requires a sqlalchemy version below 2.0. This will be addressed in a future release. Disabling SQL storage in Ax for now, if you would like to use SQL storage please install Ax with mysql extras via `pip install ax-platform[mysql]`.
-  0%|          | 0/20 [00:00<?, ?it/s][INFO 05-27 17:57:37] ax.api.client: Generated new trial 0 with parameters {'duty_cycle': 0.557643, 'pillar_thickness': 1271.647958, 'residual_thickness': 94.551241, 'lines_per_mm': 585.934561, 'aoi': 34.747887} using GenerationNode Sobol.
-0
-Submitted batch job 47846357
-SUCCESS
-[INFO 05-27 17:59:58] ax.api.client: Trial 0 marked COMPLETED.
-  5%|▌         | 1/20 [02:21<44:49, 141.54s/it][INFO 05-27 17:59:58] ax.api.client: Generated new trial 1 with parameters {'duty_cycle': 0.428866, 'pillar_thickness': 1391.612416, 'residual_thickness': 105.361605, 'lines_per_mm': 608.636591, 'aoi': 41.439479} using GenerationNode Sobol.
-1
-Submitted batch job 47846379
-SUCCESS
-[INFO 05-27 18:01:14] ax.api.client: Trial 1 marked COMPLETED.
- 10%|█         | 2/20 [03:37<30:55, 103.06s/it][INFO 05-27 18:01:14] ax.api.client: Generated new trial 2 with parameters {'duty_cycle': 0.492448, 'pillar_thickness': 1314.810201, 'residual_thickness': 97.491455, 'lines_per_mm': 550.743931, 'aoi': 40.006488} using GenerationNode Sobol.
-2
-Submitted batch job 47846390
-SUCCESS
-2
-Submitted batch job 47846397
-SUCCESS
-[INFO 05-27 21:37:17] ax.api.client: Trial 2 marked COMPLETED.
- 15%|█▌        | 3/20 [3:39:40<28:12:56, 5975.11s/it][INFO 05-27 21:37:17] ax.api.client: Generated new trial 3 with parameters {'duty_cycle': 0.521433, 'pillar_thickness': 1468.755334, 'residual_thickness': 102.578918, 'lines_per_mm': 629.695955, 'aoi': 37.133133} using GenerationNode Sobol.
-3
-Submitted batch job 47849648
-SUCCESS
-3
-Submitted batch job 47849657
-SUCCESS
-[INFO 05-28 00:54:32] ax.api.client: Trial 3 marked COMPLETED.
- 20%|██        | 4/20 [6:56:55<36:50:18, 8288.64s/it][INFO 05-28 00:54:32] ax.api.client: Generated new trial 4 with parameters {'duty_cycle': 0.529861, 'pillar_thickness': 1357.141077, 'residual_thickness': 108.277414, 'lines_per_mm': 645.354121, 'aoi': 37.480903} using GenerationNode Sobol.
-4
-Submitted batch job 47850465
-SUCCESS
-4
-Submitted batch job 47850468
-SUCCESS
-[INFO 05-28 04:31:26] ax.api.client: Trial 4 marked COMPLETED.
- 25%|██▌       | 5/20 [10:33:49<41:38:08, 9992.59s/it][INFO 05-28 04:31:26] ax.api.client: Generated new trial 5 with parameters {'duty_cycle': 0.458602, 'pillar_thickness': 1512.369564, 'residual_thickness': 91.802382, 'lines_per_mm': 572.645988, 'aoi': 38.474859} using GenerationNode Sobol.
-5
-Submitted batch job 47851240
-SUCCESS
-[INFO 05-28 04:32:41] ax.api.client: Trial 5 marked COMPLETED.
- 30%|███       | 6/20 [10:35:03<25:44:45, 6620.36s/it][INFO 05-28 04:32:41] ax.api.client: Generated new trial 6 with parameters {'duty_cycle': 0.420035, 'pillar_thickness': 1297.044005, 'residual_thickness': 100.962243, 'lines_per_mm': 617.973131, 'aoi': 40.860571} using GenerationNode Sobol.
-6
-Submitted batch job 47851243
-SUCCESS
-[INFO 05-28 04:33:55] ax.api.client: Trial 6 marked COMPLETED.
- 35%|███▌      | 7/20 [10:36:18<16:10:43, 4480.30s/it][INFO 05-28 04:33:55] ax.api.client: Generated new trial 7 with parameters {'duty_cycle': 0.591111, 'pillar_thickness': 1417.771788, 'residual_thickness': 98.960101, 'lines_per_mm': 589.015005, 'aoi': 36.048378} using GenerationNode Sobol.
-7
-Submitted batch job 47851246
-SUCCESS
-[INFO 05-28 04:35:09] ax.api.client: Trial 7 marked COMPLETED.
- 40%|████      | 8/20 [10:37:32<10:15:31, 3077.62s/it][INFO 05-28 04:35:09] ax.api.client: Generated new trial 8 with parameters {'duty_cycle': 0.585863, 'pillar_thickness': 1332.696216, 'residual_thickness': 101.684161, 'lines_per_mm': 567.12376, 'aoi': 41.821454} using GenerationNode Sobol.
-8
-Submitted batch job 47851249
-SUCCESS
-[INFO 05-28 04:36:23] ax.api.client: Trial 8 marked COMPLETED.
- 45%|████▌     | 9/20 [10:38:46<6:32:05, 2138.71s/it] [INFO 05-28 04:36:23] ax.api.client: Generated new trial 9 with parameters {'duty_cycle': 0.400675, 'pillar_thickness': 1452.484057, 'residual_thickness': 98.393496, 'lines_per_mm': 639.923445, 'aoi': 35.088838} using GenerationNode Sobol.
-9
-Submitted batch job 47851254
-SUCCESS
-[INFO 05-28 04:37:38] ax.api.client: Trial 9 marked COMPLETED.
- 50%|█████     | 10/20 [10:40:00<4:10:13, 1501.37s/it][INFO 05-28 04:37:40] ax.api.client: Generated new trial 10 with parameters {'duty_cycle': 0.50792, 'pillar_thickness': 1237.5, 'residual_thickness': 110.0, 'lines_per_mm': 605.651955, 'aoi': 41.169747} using GenerationNode UCB.
-10
-Submitted batch job 47851258
-SUCCESS
-[INFO 05-28 04:38:54] ax.api.client: Trial 10 marked COMPLETED.
- 55%|█████▌    | 11/20 [10:41:17<2:39:48, 1065.38s/it][INFO 05-28 04:38:55] ax.api.client: Generated new trial 11 with parameters {'duty_cycle': 0.526369, 'pillar_thickness': 1473.109183, 'residual_thickness': 104.538543, 'lines_per_mm': 641.188752, 'aoi': 37.143049} using GenerationNode UCB.
-11
-Submitted batch job 47851263
-SUCCESS
-11
-Submitted batch job 47851269
-SUCCESS
-[INFO 05-28 08:30:13] ax.api.client: Trial 11 marked COMPLETED.
- 60%|██████    | 12/20 [14:32:36<11:01:46, 4963.30s/it][INFO 05-28 08:30:14] ax.api.client: Generated new trial 12 with parameters {'duty_cycle': 0.514325, 'pillar_thickness': 1349.542794, 'residual_thickness': 101.021642, 'lines_per_mm': 587.598816, 'aoi': 38.471273} using GenerationNode UCB.
-12
-Submitted batch job 47855050
-SUCCESS
-12
-Submitted batch job 47855105
-SUCCESS
-[INFO 05-28 12:22:36] ax.api.client: Trial 12 marked COMPLETED.
- 65%|██████▌   | 13/20 [18:24:59<14:56:24, 7683.52s/it][INFO 05-28 12:22:37] ax.api.client: Generated new trial 13 with parameters {'duty_cycle': 0.514736, 'pillar_thickness': 1343.123625, 'residual_thickness': 105.786643, 'lines_per_mm': 633.768077, 'aoi': 37.075549} using GenerationNode UCB.
-13
-Submitted batch job 47857779
-SUCCESS
-13
-Submitted batch job 47857796
-[2026-05-28T14:02:26.011] error: *** JOB 47846346 ON p0214 CANCELLED AT 2026-05-28T14:02:26 DUE TO TIME LIMIT ***

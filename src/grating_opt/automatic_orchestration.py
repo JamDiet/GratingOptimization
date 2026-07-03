@@ -1,13 +1,12 @@
 import os
 from typing import Any, Mapping
-import numpy as np
 
 import pandas as pd
 from ax.api.protocols.metric import IMetric
 from ax.api.protocols.runner import IRunner, TrialStatus
 from ax.api.types import TParameterization
 
-from src.grating_opt.simulation_calls import call_sims_async, call_on_same_node, Result
+from src.grating_opt.simulation_calls import call_on_same_node, Result
 from src.grating_opt.utils import save_trial_data
 
 
@@ -19,23 +18,6 @@ class Runner(IRunner):
     def run_trial(
         self, trial_index: int, parameterization: TParameterization
     ) -> dict[str, Any]:
-        
-        # Test against constraint
-        D = 1000 / parameterization["lines_per_mm"]
-        h = parameterization["pillar_thickness"] / 1000
-        w_b = D * parameterization["duty_cycle"]
-        phi = parameterization["slope_angle"]
-        dx_one_side = h / np.tan(phi * np.pi / 180)
-
-        if w_b - 2*dx_one_side <= 0:
-            print(f"Trial {trial_index}: Invalid geometry, skipping trial.")
-            return {
-                "result_rcwa": None,
-                "result_fdtd": None,
-                "DE_filename": None,
-                "params": parameterization,
-                "reward": -10.
-            }
         
         res = call_on_same_node(
             trial=trial_index,
@@ -126,7 +108,6 @@ class Metric(IMetric):
                 filename=DE_filename,
                 DE_col=self.DE_col,
                 wavelength_col=self.wavelength_col,
-                trial_idx=trial_index,
                 comp_wavelength=self.comp_wavelength
             )
 

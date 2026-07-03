@@ -1,19 +1,19 @@
-duty_cycle:
+dc:
   lb: 0.4
   ub: 0.6
   parameter_type: float
 
-pillar_thickness:
+tp:
   lb: 1200
   ub: 1475
   parameter_type: float
 
-residual_thickness:
+tr:
  lb: 0
  ub: 200
  parameter_type: float
 
-lines_per_mm:
+lmm:
  lb: 550
  ub: 650
  parameter_type: float
@@ -23,7 +23,7 @@ aoi:
   ub: 40.5    # [degrees]
   parameter_type: float
 
-slope_angle:
+sa:
   lb: 75.0   # [degrees]
   ub: 90.0   # [degrees]
   parameter_type: float

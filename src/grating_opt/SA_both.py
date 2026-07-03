@@ -4,20 +4,11 @@ import os
 from src.grating_opt.utils import get_project_root
 
 
-submission_script= 'sub_both.pbs'
 prototype_fdtd = 'Prototype_FDTD.m'
 prototype_rcwa = 'Prototype_RCWA.m'
 
 
 def run_both(trial: int, params: dict):
-    # Input parameters
-    aoi = params["aoi"]
-    dc = params["duty_cycle"]
-    tp = params["pillar_thickness"]
-    tr = params["residual_thickness"]
-    lmm = params["lines_per_mm"]
-    sa = params["slope_angle"]
-
     # Make result directories
     if not os.path.exists('Results'):
         os.mkdir('Results')
@@ -38,13 +29,13 @@ def run_both(trial: int, params: dict):
     inputFile=f.read()
     f.close()
 
-    newcode = inputFile.replace("<aoi>",str(aoi))		
-    newcode = newcode.replace("<dc>",str(dc))
-    newcode = newcode.replace("<tp>",str(tp))
+    # Replace placeholders in the prototype code with actual parameter values
+    newcode = inputFile
+
+    for k, v in params.items():
+        newcode = newcode.replace(f"<{k}>", str(v))
+    
     newcode = newcode.replace("<result_fdtd>", result_fdtd)
-    newcode = newcode.replace("<tr>",str(tr))
-    newcode = newcode.replace("<lmm>",str(lmm))
-    newcode = newcode.replace("<sa>",str(sa))
 
     FDTD_file = f'{trial_dir}/code_fdtd_{trial}.m'
 
@@ -57,14 +48,15 @@ def run_both(trial: int, params: dict):
     inputFile=f.read()
     f.close()
 
-    newcode = inputFile.replace("<aoi>",str(aoi))        
-    newcode = newcode.replace("<dc>",str(dc))
-    newcode = newcode.replace("<tp>",str(tp))
+    # Replace placeholders in the prototype code with actual parameter values
+
+    newcode = inputFile
+
+    for k, v in params.items():
+        newcode = newcode.replace(f"<{k}>", str(v))
+    
     newcode = newcode.replace("<result_rcwa>", result_rcwa)
     newcode = newcode.replace("<DE_filename>", DE_filename)
-    newcode = newcode.replace("<tr>",str(tr))
-    newcode = newcode.replace("<lmm>",str(lmm))
-    newcode = newcode.replace("<sa>",str(sa))
 
     RCWA_file = f'{trial_dir}/code_rcwa_{trial}.m'
 

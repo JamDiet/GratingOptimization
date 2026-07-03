@@ -101,7 +101,12 @@ mu0     = 1/c^2/ep0;        % vacuum permeability
 
 
 %% Create a Grid class (nx[#], ny[#], d[nm], T[fs])
-myGrid = Grid(2000, 1100, 12, 170);
+
+% Adjust ny to accommodate variable residual layer thickness
+%ny = round(1100 + (1475 - <tp> - <tr>) / 12);
+ny = 1300;
+
+myGrid = Grid(2000, ny, 12, 170);
 
 nx   = myGrid.nx;
 ny   = myGrid.ny;

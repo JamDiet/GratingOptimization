@@ -1,61 +1,8 @@
-from ax.api.client import Client
+import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# def plot_frontier(client: Client, filepath: str):
-#     frontier = client.get_pareto_frontier()
-
-#     peak_ne = []
-#     diff_eff = []
-
-#     # Retrieve objective metrics
-#     for _, metrics, _, _ in frontier:
-#         peak_ne.append(metrics["peak_ne"][0])
-#         diff_eff.append(metrics["diff_eff"][0])
-    
-#     # Sort points by peak_ne to ensure a clean frontier line
-#     sorted_indices = sorted(range(len(peak_ne)), key=lambda k: peak_ne[k])
-#     peak_ne = [peak_ne[i] for i in sorted_indices]
-#     diff_eff = [diff_eff[i] for i in sorted_indices]
-    
-#     # Initialize the plot
-#     plt.figure(figsize=(10, 6))
-    
-#     # Plotting the data
-#     plt.plot(peak_ne, diff_eff, marker='o', linestyle='--', color='b', label='Pareto Frontier')
-    
-#     # Apply log scale to the x-axis (Peak Electron Density)
-#     plt.xscale('log')
-    
-#     # Formatting and Labels
-#     plt.title('Pareto Frontier: Peak Electron Density vs. Diffraction Efficiency')
-#     plt.xlabel('Peak Electron Density (cm^-3)')
-#     plt.ylabel('Diffraction Efficiency')
-#     plt.grid(True, which="both", ls="-", alpha=0.5)
-#     plt.legend()
-    
-#     plt.savefig(filepath)
-
-
-# def plot_reward(best_values: list, all_values: list, filepath: str):
-#     fig, ax = plt.subplots(figsize=(12, 6))
-
-#     trials_range = range(1, len(best_values) + 1)
-
-#     # Plot best values over trials (convergence plot)
-#     ax.plot(trials_range, best_values, 'b-', linewidth=2, label='Best value found')
-
-#     # Scatter plot of all trial values
-#     ax.scatter(trials_range, all_values, c='b', alpha=0.6, s=50)
-
-#     ax.set_xlabel('Trial', fontsize=12)
-#     ax.set_ylabel('Reward', fontsize=12)
-#     ax.set_title('Optimization Progress', fontsize=14)
-#     ax.legend(loc='upper right')
-#     ax.grid(True, alpha=0.3)
-
-#     plt.tight_layout()
-#     plt.savefig(filepath)
+from src.grating_opt.utils import calc_crit_ne
 
 
 def plot_reward_from_csv(csv_filepath: str, output_filepath: str):
@@ -80,7 +27,7 @@ def plot_reward_from_csv(csv_filepath: str, output_filepath: str):
         
     # 4. Plot using the logic provided in plot_reward
     fig, ax = plt.subplots(figsize=(12, 6))
-    trials_range = range(1, len(best_values) + 1)
+    trials_range = range(0, len(best_values))
 
     # Scatter plot of all trial values
     ax.scatter(trials_range, all_values, c='b', alpha=0.6, s=50, label='Trial Reward')
@@ -91,9 +38,73 @@ def plot_reward_from_csv(csv_filepath: str, output_filepath: str):
     ax.set_xlabel('Trial', fontsize=12)
     ax.set_ylabel('Reward', fontsize=12)
     ax.set_title('Optimization Progress', fontsize=14)
-    ax.legend(loc='upper right')
+    ax.legend(loc='lower right')
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
+    plt.savefig(output_filepath)
+    plt.close()
+
+
+def plot_norm_ne(results_path: str, output_filepath: str, wavelength: float):
+    trial_indices = []
+    norm_ne_values = []
+    crit_ne = calc_crit_ne(wavelength)
+
+    for entry in os.listdir(results_path):
+        trial_dir = os.path.join(results_path, entry)
+        if os.path.isdir(trial_dir) and entry.isdigit():
+            trial_idx = int(entry)
+            fdtd_path = os.path.join(trial_dir, "FDTD_result.csv")
+            if os.path.exists(fdtd_path):
+                df = pd.read_csv(fdtd_path)
+                ne_peak = df["ne_peak"].values[0]
+                norm_ne = ne_peak / crit_ne
+                trial_indices.append(trial_idx)
+                norm_ne_values.append(norm_ne)
+
+    sorted_pairs = sorted(zip(trial_indices, norm_ne_values), key=lambda x: x[0])
+    trial_indices = [p[0] for p in sorted_pairs]
+    norm_ne_values = [p[1] for p in sorted_pairs]
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(trial_indices, norm_ne_values)
+    plt.axhline(y=1, linestyle=':', color='r')
+
+    plt.title('Normalized Electron Density vs Trial Index')
+    plt.xlabel('Trial Index')
+    plt.ylabel('Normalized ne (ne_peak / crit_ne)')
+    plt.grid(True)
+
+    plt.savefig(output_filepath)
+    plt.close()
+
+
+def plot_DE_vs_wavelength(csv_filepath: str, trial_indcs: list, output_filepath: str, results_path: str):
+    df_main = pd.read_csv(csv_filepath)
+    
+    plt.figure(figsize=(10, 6))
+    
+    for trial_idx in trial_indcs:
+        trial_row = df_main[df_main['trial_index'] == trial_idx]
+        if trial_row.empty:
+            continue
+        reward = trial_row['reward'].values[0]
+        
+        trial_csv_path = os.path.join(results_path, f"{trial_idx}", "DE_vs_wavelength.csv")
+        df = pd.read_csv(trial_csv_path)
+        
+        wavelength = df['Wavelength_um'].values
+        diffraction_efficiency = df['DE_reflected_m1'].values
+        
+        plt.plot(wavelength, diffraction_efficiency, marker='o', linestyle='-', label=f'Trial {trial_idx}: {reward}')
+    
+    plt.title('Diffraction Efficiency vs Wavelength')
+    plt.xlabel('Wavelength (um)')
+    plt.ylabel('Diffraction Efficiency')
+    plt.grid(True)
+    plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left')
+    plt.tight_layout()
+    
     plt.savefig(output_filepath)
     plt.close()

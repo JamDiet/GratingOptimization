@@ -12,6 +12,10 @@ def get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent.parent
 
 
+def get_results_root() -> Path:
+    return get_project_root() / "Results"
+
+
 def get_config_root() -> Path:
     return get_project_root() / "configs"
 
@@ -56,25 +60,21 @@ def load_params(params: dict):
 
 def load_preexisting_trials(csv_filename: str):
     full_path = get_data_root() / "csvs" / csv_filename
-
     # 1. Read the CSV back into a DataFrame
     df = pd.read_csv(full_path)
-
     # 2. Define which columns belong to which group
-    param_cols = ["duty_cycle", "pillar_thickness", "aoi"]
     metric_cols = ["reward"]
-
+    exclude_cols = set(metric_cols + ["trial_index"])
+    param_cols = [col for col in df.columns if col not in exclude_cols]
     preexisting_trials = []
-
     # 3. Iterate through rows and build the nested dictionary structure
     for _, row in df.iterrows():
         # Convert row subsets to dictionaries, ignoring the pandas index
         params_dict = row[param_cols].to_dict()
         metrics_dict = row[metric_cols].to_dict()
-        
+
         # Append as a tuple of the two dicts
         preexisting_trials.append((params_dict, metrics_dict))
-
     return preexisting_trials
 
 
