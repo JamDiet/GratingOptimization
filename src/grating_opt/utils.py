@@ -80,10 +80,10 @@ def load_preexisting_trials(csv_filename: str):
 
 def calc_crit_ne(wavelength: float):
     """
-    :param wavelength: Wavelength in um
+    :param wavelength: Wavelength in nm
     :type wavelength: float
     """
-    return 1.1149 / (wavelength ** 2)  # in nm
+    return 1.1149 / ((wavelength / 1000) ** 2)  # in nm
 
 
 def query_surrogate(client: Client, params: dict):

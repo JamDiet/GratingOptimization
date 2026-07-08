@@ -394,6 +394,5 @@ disp('Saved wavelength sweep result to DE_vs_wavelength.csv');
 % =========================================================
 % Save results for Python to read back
 % =========================================================
-rcwa_result = table(teta0, <tp>, <dc>, <lmm>, <tr>, teta0, max(DE_m1), mean(DE_m1), ...
-    'VariableNames', {'aoi', 'tp', 'dc', 'lmm', 'tr', 'sa', 'DE_m1_peak', 'DE_m1_avg'});
+rcwa_result = table(max(DE_m1), mean(DE_m1), 'VariableNames', {'DE_m1_peak', 'DE_m1_avg'});
 writetable(rcwa_result, '<result_rcwa>');

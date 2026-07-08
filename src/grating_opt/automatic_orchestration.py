@@ -11,9 +11,9 @@ from src.grating_opt.utils import save_trial_data
 
 
 class Runner(IRunner):
-    def __init__(self, local: bool=False, *args, **kwargs):
+    def __init__(self, results_dir: str = 'Results', *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.local = local
+        self.results_dir = results_dir
 
     def run_trial(
         self, trial_index: int, parameterization: TParameterization
@@ -22,7 +22,7 @@ class Runner(IRunner):
         res = call_on_same_node(
             trial=trial_index,
             params=parameterization,
-            local=self.local
+            results_dir=self.results_dir
         )
 
         res["params"] = parameterization
@@ -56,28 +56,28 @@ class Runner(IRunner):
 class Metric(IMetric):
     def __init__(
             self,
-            a: float,
-            b: float,
-            c: float,
             crit_ne: float,
             csv_filename: str,
-            include_penalties: bool=False,
+            a: float=5,
+            b: float=10,
             DE_col: str=None,
             wavelength_col: str=None,
             comp_wavelength: float=1950,
+            DE_peak_threshold: float=0.98,
+            DE_avg_threshold: float=0.92,
             *args,
             **kwargs
     ):
         super().__init__(*args, **kwargs)
         self.a = a
         self.b = b
-        self.c = c
         self.crit_ne = crit_ne
         self.csv_filename = csv_filename
-        self.include_penalties = include_penalties
         self.DE_col = DE_col
         self.wavelength_col = wavelength_col
         self.comp_wavelength = comp_wavelength
+        self.DE_peak_threshold = DE_peak_threshold
+        self.DE_avg_threshold = DE_avg_threshold
 
     def fetch(
         self,
@@ -89,7 +89,7 @@ class Metric(IMetric):
         else:
             rcwa_res = trial_metadata["result_rcwa"]
             fdtd_res = trial_metadata["result_fdtd"]
-            DE_filename = trial_metadata["DE_filename"]
+            DE_filepath = trial_metadata["DE_filename"]
 
             rcwa_df = pd.read_csv(rcwa_res)
             fdtd_df = pd.read_csv(fdtd_res)
@@ -97,15 +97,15 @@ class Metric(IMetric):
             res = Result(
                 norm_ne=fdtd_df['ne_peak'].iloc[0] / self.crit_ne,
                 peak_diff_eff=rcwa_df['DE_m1_peak'].iloc[0],
-                diff_eff_avg=rcwa_df['DE_m1_avg'].iloc[0]
+                diff_eff_avg=rcwa_df['DE_m1_avg'].iloc[0],
+                DE_peak_threshold=self.DE_peak_threshold,
+                DE_avg_threshold=self.DE_avg_threshold
             )
 
             reward = res.calc_reward(
                 a=self.a,
                 b=self.b,
-                c=self.c,
-                include_penalties=self.include_penalties,
-                filename=DE_filename,
+                filepath=DE_filepath,
                 DE_col=self.DE_col,
                 wavelength_col=self.wavelength_col,
                 comp_wavelength=self.comp_wavelength

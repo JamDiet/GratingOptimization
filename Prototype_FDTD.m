@@ -695,6 +695,5 @@ end
 % =========================================================
 % Save results for Python to read back
 % =========================================================
-fdtd_result = table(aoi, pillar_depth, 1 - duty_cycle, lines_per_mm, ita, <tr>, ...
-    max(max(nCBefilm)), 'VariableNames', {'aoi', 'tp', 'dc', 'lmm', 'ita', 'tr', 'ne_peak'});
+fdtd_result = table(max(max(nCBefilm)), 'VariableNames', {'ne_peak'});
 writetable(fdtd_result, '<result_fdtd>');

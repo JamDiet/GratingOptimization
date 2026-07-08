@@ -2,7 +2,6 @@ venv/
 lib/
 Results/
 logs/
-tests/
 
 *.csv
 *.pyc

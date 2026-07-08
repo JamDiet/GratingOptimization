@@ -8,13 +8,13 @@ prototype_fdtd = 'Prototype_FDTD.m'
 prototype_rcwa = 'Prototype_RCWA.m'
 
 
-def run_both(trial: int, params: dict):
+def run_both(trial: int, params: dict, results_dir: str = 'Results'):
     # Make result directories
-    if not os.path.exists('Results'):
-        os.mkdir('Results')
+    if not os.path.exists(results_dir):
+        os.mkdir(results_dir)
 
     #make new folder
-    trial_dir = os.path.join(get_project_root(), 'Results', str(trial))
+    trial_dir = os.path.join(get_project_root(), results_dir, str(trial))
     os.makedirs(trial_dir, exist_ok=True)
 
     # Result files
