@@ -149,7 +149,7 @@ def plot_pareto_frontier(results_path: str, output_filepath: str, wavelength: fl
             zorder=4, label=f"Trial {ti}",
         )
 
-    ax.set_title(f"Pareto Frontier at Wavelength {wavelength:.3f} $\\mu$m", fontsize=14, fontweight="bold")
+    ax.set_title(f"Pareto Frontier at Wavelength {wavelength/1000:.2f} $\\mu$m", fontsize=14, fontweight="bold")
     ax.set_xlabel(r"Normalized $n_e$ ($n_{e,\mathrm{peak}} / n_{e,\mathrm{crit}}$)")
     ax.set_ylabel("Diffraction Efficiency (central wavelength)")
     ax.grid(True, linestyle=":", alpha=0.5)

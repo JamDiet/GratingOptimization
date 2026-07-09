@@ -21,4 +21,4 @@ mkdir -p logs
 #--- Execute Main Script ---
 # Run the main Python file directly. Do NOT prefix this line with srun.
 # Python needs to run on the head allocation node so it can coordinate the background tasks.
-python -m src.grating_opt.main_async
+python -m src.grating_opt.main
