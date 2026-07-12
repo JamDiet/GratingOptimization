@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH --time=5:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=40
+#SBATCH --account=PAS1730
+#SBATCH --exclusive
+#SBATCH --output=logs/opt_%j.out
+#SBATCH --error=logs/opt_%j.err
+
+#--- Setup Environment ---
+module reset
+module load python/3.12   # Replace with your preferred Python version module
+module load matlab/r2024a       # Ensures MATLAB is available to the background subprocesses
+
+# If you use a virtual environment or conda, activate it here:
+source venv/bin/activate
+
+# Create a logs directory for standard output if it doesn't exist
+mkdir -p logs
+
+#--- Execute Main Script ---
+# Run the main Python file directly. Do NOT prefix this line with srun.
+# Python needs to run on the head allocation node so it can coordinate the background tasks.
+python -m tests.test_prototype

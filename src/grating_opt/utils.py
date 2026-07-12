@@ -16,6 +16,10 @@ def get_results_root() -> Path:
     return get_project_root() / "Results"
 
 
+def get_prototype_results_root() -> Path:
+    return get_project_root() / "prototype_results"
+
+
 def get_config_root() -> Path:
     return get_project_root() / "configs"
 
