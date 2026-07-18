@@ -1,0 +1,39 @@
+#!/bin/bash
+#SBATCH --time=25:00:00
+#SBATCH --nodes=3
+#SBATCH --ntasks-per-node=40
+#SBATCH --account=PAS1730
+#SBATCH --exclusive
+#SBATCH --output=../logs/surrogate_%j.out
+#SBATCH --error=../logs/surrogate_%j.err
+
+# Submit this job with the Surrogate directory as your working directory:
+#   cd experiments/<name>/Surrogate && sbatch sub_surrogate.job [--n_sets N] [--config default.yml]
+# --output/--error above are resolved by `sbatch` at submission time, relative
+# to that CWD -- this lands logs one level up in the shared experiment-level
+# logs/ folder, same convention as Prototype/sub_test.job.
+#
+# --nodes controls parallelism: test_surrogate.py reads SLURM_JOB_NUM_NODES
+# and keeps that many simulations running concurrently until every sampled
+# parameter set has been evaluated.
+
+set -euo pipefail
+
+if [ -z "${SLURM_SUBMIT_DIR:-}" ]; then
+    echo "ERROR: SLURM_SUBMIT_DIR is not set -- submit with sbatch from experiments/<name>/Surrogate/, don't run this script directly." >&2
+    exit 1
+fi
+
+SURROGATE_DIR="$SLURM_SUBMIT_DIR"
+REPO_ROOT="$(cd "$SURROGATE_DIR/../../.." && pwd)"
+
+#--- Setup Environment ---
+module reset
+module load python/3.12
+module load matlab/r2024a
+
+source "$REPO_ROOT/venv/bin/activate"
+export PYTHONPATH="$REPO_ROOT${PYTHONPATH:+:$PYTHONPATH}"
+
+#--- Execute Main Script ---
+python "$SURROGATE_DIR/test_surrogate.py" "$@"

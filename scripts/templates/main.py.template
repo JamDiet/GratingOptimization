@@ -1,5 +1,13 @@
 import os
+import sys
 import argparse
+from pathlib import Path
+
+EXPERIMENT_ROOT = Path(__file__).resolve().parent           # experiments/<name>
+REPO_ROOT = EXPERIMENT_ROOT.parent.parent                    # repo root
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from src.grating_opt.optimization import opt_async
 from src.grating_opt import utils
 
@@ -8,13 +16,14 @@ DE_col = "DE_reflected_m1"
 wavelength_col = "Wavelength_um"
 results_dir = "Results"
 
+
 def main(args):
     # Load optimizable parameters
-    config = utils.load_config(args.config)
+    config = utils.load_config(EXPERIMENT_ROOT, args.config)
     params = utils.load_params(config)
 
     # Load preexisting trials if available
-    preexisting_trials = utils.load_preexisting_trials(trial_data_filename)
+    preexisting_trials = utils.load_preexisting_trials(EXPERIMENT_ROOT, trial_data_filename)
 
     # Set number of parallel trials based on nodes available
     parallelism = int(os.environ.get("SLURM_JOB_NUM_NODES", 1))
@@ -32,6 +41,7 @@ def main(args):
 
     # Run optimization
     client = opt_async(
+        experiment_root=EXPERIMENT_ROOT,
         params=params,
         num_trials=num_trials,
         seed_trials=seed_trials,

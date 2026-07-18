@@ -5,6 +5,7 @@ from src.grating_opt.utils import calc_crit_ne
 
 
 def opt_async(
+        experiment_root,
         params: list,
         num_trials: int,
         seed_trials: int=10,
@@ -24,6 +25,8 @@ def opt_async(
     """
     Asynchronous version of optimize_params. Trials are submitted to the cluster and then polled for completion.
 
+    :param experiment_root: Root directory of the experiment (anchors results_dir/csv_filename paths)
+    :type experiment_root: pathlib.Path
     :param params: List of RangeParameterConfigs for optimizable parameters
     :type params: list
     :param num_trials: Number of optimization trials
@@ -59,9 +62,10 @@ def opt_async(
     :rtype: ax.api.client.Client
     """
     # Initialize asynchronous runner and metric
-    runner = Runner(results_dir=results_dir)
+    runner = Runner(experiment_root=experiment_root, results_dir=results_dir)
     metric = Metric(
         name="reward",
+        experiment_root=experiment_root,
         a=a,
         b=b,
         crit_ne=calc_crit_ne(central_wavelength),

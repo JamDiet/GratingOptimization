@@ -1,0 +1,101 @@
+import argparse
+import sys
+import time
+from pathlib import Path
+
+PROTOTYPE_ROOT = Path(__file__).resolve().parent            # experiments/mld_spol/Prototype
+EXPERIMENT_ROOT = PROTOTYPE_ROOT.parent                      # experiments/mld_spol
+REPO_ROOT = EXPERIMENT_ROOT.parent.parent                    # repo root
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+import pandas as pd
+
+from src.grating_opt import utils
+from src.grating_opt.SA_both import run_both
+from src.grating_opt.simulation_calls import Result
+
+DE_col = "DE_reflected_m1"
+wavelength_col = "Wavelength_um"
+a = 5
+b = 10
+DE_peak_threshold = 0.98
+DE_avg_threshold = 0.92
+central_wavelength = 1950  # [nm]
+
+poll_interval = 30          # seconds
+timeout = 4.5 * 3600        # stay under sub_test.job's 5:00:00 walltime
+
+
+def main(config_name: str):
+    params = utils.load_config(PROTOTYPE_ROOT, config_name)  # explicit VALUES, not ranges
+    config_stem = Path(config_name).stem                     # "default.yml" -> "default"
+
+    results_root = utils.get_results_root(PROTOTYPE_ROOT)     # Prototype/Results
+
+    # matlab_code/ templates live at the EXPERIMENT level (shared with the
+    # optimization pipeline), not duplicated under Prototype/.
+    result_fdtd, result_rcwa, DE_filename = run_both(
+        experiment_root=EXPERIMENT_ROOT,
+        results_root=results_root,
+        trial=config_stem,
+        params=params,
+    )
+
+    # run_both launches the MATLAB jobs in the background and returns
+    # immediately; poll for completion (same convention as
+    # automatic_orchestration.Runner.poll_trial).
+    elapsed = 0
+    while elapsed < timeout:
+        files_exist = Path(result_fdtd).exists() and Path(result_rcwa).exists()
+        files_nonempty = (
+            files_exist
+            and Path(result_fdtd).stat().st_size > 0
+            and Path(result_rcwa).stat().st_size > 0
+        )
+        if files_nonempty:
+            print(f"Simulations complete after {elapsed} seconds.")
+            break
+        time.sleep(poll_interval)
+        elapsed += poll_interval
+    else:
+        print(f"Timed out after {elapsed} seconds waiting for simulations to finish.")
+        return
+
+    rcwa_df = pd.read_csv(result_rcwa)
+    fdtd_df = pd.read_csv(result_fdtd)
+
+    res = Result(
+        norm_ne=fdtd_df["ne_peak"].iloc[0] / utils.calc_crit_ne(central_wavelength),
+        peak_diff_eff=rcwa_df["DE_m1_peak"].iloc[0],
+        diff_eff_avg=rcwa_df["DE_m1_avg"].iloc[0],
+        DE_peak_threshold=DE_peak_threshold,
+        DE_avg_threshold=DE_avg_threshold,
+    )
+    reward = res.calc_reward(
+        a=a,
+        b=b,
+        filepath=DE_filename,
+        DE_col=DE_col,
+        wavelength_col=wavelength_col,
+        comp_wavelength=central_wavelength,
+    )
+    print(f"Reward for prototype config '{config_stem}': {reward}")
+
+    utils.save_trial_data(
+        root=PROTOTYPE_ROOT,
+        trial_index=config_stem,
+        reward=reward,
+        params=params,
+        filename="prototype_data.csv",
+    )
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "config", type=str,
+        help="Prototype config filename under Prototype/configs/, e.g. default.yml",
+    )
+    args = parser.parse_args()
+    main(args.config)

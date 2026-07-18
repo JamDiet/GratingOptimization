@@ -53,8 +53,8 @@ class Result:
         return df.loc[df[DE_col].idxmax(), wavelength_col] * 1000
 
 
-def call_on_same_node(trial: int, params: dict, results_dir: str = 'Results'):
-    result_fdtd, result_rcwa, DE_filename = run_both(trial, params, results_dir)
+def call_on_same_node(experiment_root, results_root, trial, params: dict):
+    result_fdtd, result_rcwa, DE_filename = run_both(experiment_root, results_root, trial, params)
 
     res_dict = {
         "result_fdtd": result_fdtd,

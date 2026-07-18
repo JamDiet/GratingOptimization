@@ -1,79 +1,57 @@
 import subprocess
-import os
-
-from src.grating_opt.utils import get_project_root
+from pathlib import Path
 
 
-prototype_fdtd = 'Prototype_FDTD.m'
-prototype_rcwa = 'Prototype_RCWA.m'
+def run_both(experiment_root: Path, results_root: Path, trial, params: dict):
+    matlab_dir = Path(experiment_root) / "matlab_code"
+    prototype_fdtd = matlab_dir / "Prototype_FDTD.m"
+    prototype_rcwa = matlab_dir / "Prototype_RCWA.m"
 
-
-def run_both(trial: int, params: dict, results_dir: str = 'Results'):
-    # Make result directories
-    if not os.path.exists(results_dir):
-        os.mkdir(results_dir)
-
-    #make new folder
-    trial_dir = os.path.join(get_project_root(), results_dir, str(trial))
-    os.makedirs(trial_dir, exist_ok=True)
+    trial_dir = Path(results_root) / str(trial)
+    trial_dir.mkdir(parents=True, exist_ok=True)
 
     # Result files
-    result_fdtd = os.path.join(trial_dir, 'FDTD_result.csv')
-    result_rcwa = os.path.join(trial_dir, 'RCWA_result.csv')
-    DE_filename = os.path.join(trial_dir, 'DE_vs_wavelength.csv')
+    result_fdtd = trial_dir / 'FDTD_result.csv'
+    result_rcwa = trial_dir / 'RCWA_result.csv'
+    DE_filename = trial_dir / 'DE_vs_wavelength.csv'
 
     # ======= Replace matlab code and copy here ======= #
 
     # FDTD
-    f = open(prototype_fdtd,'r',encoding='utf-8')
-    inputFile=f.read()
-    f.close()
+    newcode = prototype_fdtd.read_text(encoding='utf-8')
 
     # Replace placeholders in the prototype code with actual parameter values
-    newcode = inputFile
-
     for k, v in params.items():
         newcode = newcode.replace(f"<{k}>", str(v))
-    
-    newcode = newcode.replace("<result_fdtd>", result_fdtd)
 
-    FDTD_file = f'{trial_dir}/code_fdtd_{trial}.m'
+    newcode = newcode.replace("<result_fdtd>", str(result_fdtd))
 
-    f = open(FDTD_file,'w',encoding='utf-8')
-    f.write(newcode)
-    f.close()
+    FDTD_file = trial_dir / f'code_fdtd_{trial}.m'
+    FDTD_file.write_text(newcode, encoding='utf-8')
 
     # RCWA
-    f = open(prototype_rcwa,'r',encoding='utf-8')
-    inputFile=f.read()
-    f.close()
+    newcode = prototype_rcwa.read_text(encoding='utf-8')
 
     # Replace placeholders in the prototype code with actual parameter values
-
-    newcode = inputFile
-
     for k, v in params.items():
         newcode = newcode.replace(f"<{k}>", str(v))
-    
-    newcode = newcode.replace("<result_rcwa>", result_rcwa)
-    newcode = newcode.replace("<DE_filename>", DE_filename)
 
-    RCWA_file = f'{trial_dir}/code_rcwa_{trial}.m'
+    newcode = newcode.replace("<result_rcwa>", str(result_rcwa))
+    newcode = newcode.replace("<DE_filename>", str(DE_filename))
 
-    f = open(RCWA_file,'w',encoding='utf-8')
-    f.write(newcode)
-    f.close()
+    RCWA_file = trial_dir / f'code_rcwa_{trial}.m'
+    RCWA_file.write_text(newcode, encoding='utf-8')
 
     # 1. We allocate a "Job Step" container of 1 node and 2 cores dynamically from your pool.
     # 2. We then run both MATLAB scripts inside that specific container sequentially or simultaneously.
-    
+
     # We wrap the execution in a single background shell command string
-    # This guarantees that the 'salloc' step picks ONE node from your pool, 
+    # This guarantees that the 'salloc' step picks ONE node from your pool,
     # and both srun commands execute inside that exact same picked node.
     cluster_cmd = (
-        f"srun --ntasks=1 --cpus-per-task=1 --mpi=none matlab -batch \"run('{RCWA_file}')\" && "
-        f"srun --ntasks=1 --cpus-per-task=40 --mpi=none matlab -batch \"run('{FDTD_file}')\""
+        f"srun --exclusive --nodes=1 --ntasks=1 --cpus-per-task=1 --mpi=none matlab -batch \"run('{RCWA_file}')\" && "
+        f"srun --exclusive --nodes=1 --ntasks=1 --cpus-per-task=40 --mpi=none matlab -batch \"run('{FDTD_file}')\""
     )
     subprocess.Popen(cluster_cmd, shell=True)
-    
-    return result_fdtd, result_rcwa, DE_filename
+
+    return str(result_fdtd), str(result_rcwa), str(DE_filename)

@@ -1,0 +1,38 @@
+#!/bin/bash
+#SBATCH --time=50:00:00
+#SBATCH --nodes=3
+#SBATCH --ntasks-per-node=40
+#SBATCH --account=PAS1730
+#SBATCH --exclusive
+#SBATCH --output=logs/opt_%j.out
+#SBATCH --error=logs/opt_%j.err
+
+# Submit this job with the EXPERIMENT DIRECTORY as your working directory:
+#   cd experiments/<name> && sbatch sub_opt.job
+# --output/--error above are resolved by `sbatch` at submission time, relative
+# to that CWD -- this is what keeps logs/ landing inside this experiment
+# folder and makes the folder self-contained.
+
+set -euo pipefail
+
+if [ -z "${SLURM_SUBMIT_DIR:-}" ]; then
+    echo "ERROR: SLURM_SUBMIT_DIR is not set -- submit with sbatch from experiments/<name>/, don't run this script directly." >&2
+    exit 1
+fi
+
+EXPERIMENT_DIR="$SLURM_SUBMIT_DIR"
+REPO_ROOT="$(cd "$EXPERIMENT_DIR/../.." && pwd)"
+
+#--- Setup Environment ---
+module reset
+module load python/3.12   # Replace with your preferred Python version module
+module load matlab/r2024a       # Ensures MATLAB is available to the background subprocesses
+
+source "$REPO_ROOT/venv/bin/activate"
+export PYTHONPATH="$REPO_ROOT${PYTHONPATH:+:$PYTHONPATH}"
+
+#--- Execute Main Script ---
+# Invoked by file path (not "-m" module invocation) so this doesn't depend on
+# namespace-package resolution working correctly across nested directories.
+# Python needs to run on the head allocation node so it can coordinate the background tasks.
+python "$EXPERIMENT_DIR/main.py"

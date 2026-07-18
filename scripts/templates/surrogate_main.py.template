@@ -1,0 +1,79 @@
+import argparse
+import os
+import sys
+from pathlib import Path
+
+SURROGATE_ROOT = Path(__file__).resolve().parent            # experiments/mld_spol/Surrogate
+EXPERIMENT_ROOT = SURROGATE_ROOT.parent                       # experiments/mld_spol
+REPO_ROOT = EXPERIMENT_ROOT.parent.parent                     # repo root
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from src.grating_opt import utils
+from src.grating_opt.surrogate import run_surrogate_test
+
+trial_data_filename = "trial_data.csv"              # optimization trial history used to fit the surrogate
+surrogate_data_filename = "surrogate_comparison.csv"
+DE_col = "DE_reflected_m1"
+wavelength_col = "Wavelength_um"
+results_dir = "Results"
+
+
+def main(args):
+    # Load parameter ranges (same config used by the optimization pipeline)
+    config = utils.load_config(EXPERIMENT_ROOT, args.config)
+
+    # Load completed optimization trials to fit the surrogate against
+    preexisting_trials = utils.load_preexisting_trials(EXPERIMENT_ROOT, trial_data_filename)
+    if not preexisting_trials:
+        raise RuntimeError(
+            f"No preexisting trial data found for '{trial_data_filename}' under "
+            f"{EXPERIMENT_ROOT}; the surrogate needs completed optimization trials to fit against."
+        )
+
+    # Set number of parallel simulations based on nodes available
+    parallelism = int(os.environ.get("SLURM_JOB_NUM_NODES", 1))
+
+    # ======= Specify surrogate test arguments ======= #
+    # ============== MANUAL INPUT ============== #
+    seed_trials = 10
+    kappa = 2
+    a = 5
+    b = 10
+    DE_peak_threshold = 0.98
+    DE_avg_threshold = 0.92
+    central_wavelength = 1950  # [nm]
+
+    # Run surrogate test
+    df = run_surrogate_test(
+        experiment_root=EXPERIMENT_ROOT,
+        surrogate_root=SURROGATE_ROOT,
+        config=config,
+        n_sets=args.n_sets,
+        preexisting_trials=preexisting_trials,
+        seed_trials=seed_trials,
+        kappa=kappa,
+        parallelism=parallelism,
+        csv_filename=surrogate_data_filename,
+        DE_col=DE_col,
+        wavelength_col=wavelength_col,
+        a=a,
+        b=b,
+        DE_peak_threshold=DE_peak_threshold,
+        DE_avg_threshold=DE_avg_threshold,
+        central_wavelength=central_wavelength,
+        results_dir=results_dir,
+    )
+
+    return df
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--config", type=str, default="default.yml")
+    parser.add_argument("--n_sets", type=int, default=20, help="Number of random parameter sets to evaluate")
+
+    args = parser.parse_args()
+
+    _ = main(args)

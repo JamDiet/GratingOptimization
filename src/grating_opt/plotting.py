@@ -1,8 +1,9 @@
 import os
+from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from src.grating_opt.utils import calc_crit_ne, get_results_root, get_data_root, get_prototype_results_root
+from src.grating_opt.utils import calc_crit_ne
 
 
 def plot_reward_from_csv(csv_filepath: str, output_filepath: str, prototype_csv_filepath: str = None):
@@ -36,9 +37,7 @@ def plot_reward_from_csv(csv_filepath: str, output_filepath: str, prototype_csv_
     ax.plot(trials_range, best_values, 'b-', linewidth=2, label='Best Value Found')
 
     # Reference line for the prototype's reward, if available
-    if prototype_csv_filepath is None:
-        prototype_csv_filepath = get_data_root() / "csvs" / "prototype_data.csv"
-    if os.path.exists(prototype_csv_filepath):
+    if prototype_csv_filepath is not None and os.path.exists(prototype_csv_filepath):
         prototype_reward = pd.read_csv(prototype_csv_filepath)['reward'].iloc[0]
         ax.axhline(y=prototype_reward, color='r', linestyle=':', linewidth=2, label='Prototype Reward')
 
@@ -49,6 +48,7 @@ def plot_reward_from_csv(csv_filepath: str, output_filepath: str, prototype_csv_
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(output_filepath)
     plt.close()
 
@@ -203,11 +203,10 @@ def _plot_single_pareto_frontier(results_path: str, output_filepath: str, wavele
         )
 
     # Reference point for the prototype, if available
-    if prototype_dir is None:
-        prototype_dir = os.path.join(get_prototype_results_root(), "0")
-    proto_fdtd_path = os.path.join(prototype_dir, "FDTD_result.csv")
-    proto_de_path = os.path.join(prototype_dir, "DE_vs_wavelength.csv")
-    if os.path.exists(proto_fdtd_path) and os.path.exists(proto_de_path):
+    if prototype_dir is not None:
+        proto_fdtd_path = os.path.join(prototype_dir, "FDTD_result.csv")
+        proto_de_path = os.path.join(prototype_dir, "DE_vs_wavelength.csv")
+    if prototype_dir is not None and os.path.exists(proto_fdtd_path) and os.path.exists(proto_de_path):
         proto_ne_peak = pd.read_csv(proto_fdtd_path)["ne_peak"].values[0]
         proto_norm_ne = proto_ne_peak / crit_ne
         proto_de_df = pd.read_csv(proto_de_path)
@@ -254,6 +253,7 @@ def _plot_single_pareto_frontier(results_path: str, output_filepath: str, wavele
     )
 
     fig.tight_layout()
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_filepath, dpi=200, bbox_inches="tight")
     plt.close(fig)
 
@@ -303,16 +303,15 @@ def plot_norm_ne(results_path: str, output_filepath: str, wavelength: float, pro
     )
 
     # Reference line for the prototype's normalized ne, if available
-    if prototype_dir is None:
-        prototype_dir = os.path.join(get_prototype_results_root(), "0")
-    prototype_fdtd_path = os.path.join(prototype_dir, "FDTD_result.csv")
-    if os.path.exists(prototype_fdtd_path):
-        prototype_ne_peak = pd.read_csv(prototype_fdtd_path)["ne_peak"].values[0]
-        prototype_norm_ne = prototype_ne_peak / crit_ne
-        ax.axhline(
-            y=prototype_norm_ne, color="red", linestyle=":", linewidth=2,
-            zorder=2, label="Prototype",
-        )
+    if prototype_dir is not None:
+        prototype_fdtd_path = os.path.join(prototype_dir, "FDTD_result.csv")
+        if os.path.exists(prototype_fdtd_path):
+            prototype_ne_peak = pd.read_csv(prototype_fdtd_path)["ne_peak"].values[0]
+            prototype_norm_ne = prototype_ne_peak / crit_ne
+            ax.axhline(
+                y=prototype_norm_ne, color="red", linestyle=":", linewidth=2,
+                zorder=2, label="Prototype",
+            )
 
     ax.set_title("Normalized Electron Density vs Trial Index", fontsize=14, fontweight="bold")
     ax.set_xlabel("Trial Index")
@@ -322,20 +321,97 @@ def plot_norm_ne(results_path: str, output_filepath: str, wavelength: float, pro
     ax.legend(frameon=False, loc="upper left", fontsize=9)
 
     fig.tight_layout()
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_filepath, dpi=200, bbox_inches="tight")
     plt.close(fig)
 
 
-def update_ne_peak_csv(wavelength: float, csv_filename: str = "ne_peak_data.csv", results_path: str = None):
+def plot_predicted_vs_actual(
+        predicted: list,
+        actual: list,
+        output_filepath: str,
+        predicted_sem: list = None,
+        metric_name: str = "Reward",
+):
+    """
+    Scatter surrogate-predicted merit function values against actual
+    (simulated) values, with a y=x reference line marking a perfect
+    surrogate. Entries where `actual` is None (e.g. a timed-out simulation)
+    are dropped before plotting.
+    """
+    predicted_arr = np.asarray(predicted, dtype=float)
+    actual_arr = np.array([np.nan if v is None else v for v in actual], dtype=float)
+
+    valid = ~(np.isnan(predicted_arr) | np.isnan(actual_arr))
+    predicted_arr = predicted_arr[valid]
+    actual_arr = actual_arr[valid]
+
+    if predicted_sem is not None:
+        predicted_sem = np.asarray(predicted_sem, dtype=float)[valid]
+
+    if len(predicted_arr) == 0:
+        raise ValueError("No completed trials with both predicted and actual values to plot.")
+
+    # --- styling ---
+    plt.rcParams.update({
+        "font.size": 12,
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+    })
+
+    fig, ax = plt.subplots(figsize=(7, 6))
+
+    if predicted_sem is not None:
+        ax.errorbar(
+            actual_arr, predicted_arr, yerr=predicted_sem,
+            fmt="o", ms=6, color="#4c72b0", ecolor="#4c72b0", alpha=0.7,
+            elinewidth=1, capsize=3, zorder=3, label="Sampled parameter sets",
+        )
+    else:
+        ax.scatter(
+            actual_arr, predicted_arr,
+            s=60, c="#4c72b0", alpha=0.7, edgecolors="white", linewidths=0.5,
+            zorder=3, label="Sampled parameter sets",
+        )
+
+    lo = min(actual_arr.min(), predicted_arr.min())
+    hi = max(actual_arr.max(), predicted_arr.max())
+    pad = 0.05 * (hi - lo) if hi > lo else 1.0
+    lims = (lo - pad, hi + pad)
+
+    ax.plot(
+        lims, lims, color="#444444", linestyle="--", linewidth=1.5,
+        zorder=2, label="Perfect surrogate (y = x)",
+    )
+    ax.set_xlim(lims)
+    ax.set_ylim(lims)
+    ax.set_aspect("equal", adjustable="box")
+
+    if len(predicted_arr) > 1:
+        corr = np.corrcoef(actual_arr, predicted_arr)[0, 1]
+        title = f"Surrogate Predicted vs. Actual {metric_name} (r = {corr:.3f})"
+    else:
+        title = f"Surrogate Predicted vs. Actual {metric_name}"
+
+    ax.set_title(title, fontsize=14, fontweight="bold")
+    ax.set_xlabel(f"Actual {metric_name} (simulation)")
+    ax.set_ylabel(f"Predicted {metric_name} (surrogate)")
+    ax.grid(True, linestyle=":", alpha=0.5)
+    ax.legend(frameon=False, loc="upper left", fontsize=9)
+
+    fig.tight_layout()
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_filepath, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
+def update_ne_peak_csv(wavelength: float, results_path: str, data_root: str, csv_filename: str = "ne_peak_data.csv"):
     """
     Scan every trial's FDTD_result.csv under results_path and (re)write a CSV
-    in data/csvs recording each trial's raw ne_peak and ne_peak normalized by
-    crit_ne. Existing rows for trials found on disk are refreshed in place;
+    in data_root/csvs recording each trial's raw ne_peak and ne_peak normalized
+    by crit_ne. Existing rows for trials found on disk are refreshed in place;
     rows for trials not found on disk are left untouched.
     """
-    if results_path is None:
-        results_path = get_results_root()
-
     crit_ne = calc_crit_ne(wavelength)
 
     rows = []
@@ -356,7 +432,7 @@ def update_ne_peak_csv(wavelength: float, csv_filename: str = "ne_peak_data.csv"
 
     new_df = pd.DataFrame(rows)
 
-    full_path = get_data_root() / "csvs" / csv_filename
+    full_path = Path(data_root) / "csvs" / csv_filename
     full_path.parent.mkdir(parents=True, exist_ok=True)
 
     if full_path.exists():
@@ -375,13 +451,20 @@ def plot_DE_vs_wavelength(
         trial_indcs: list,
         output_filepath: str,
         results_path: str,
+        wavelength: float,
         include_prototype: bool = False,
         prototype_dir: str = None,
         prototype_csv_filepath: str = None,
 ):
+    """
+    :param wavelength: Central wavelength in nm, used to normalize each
+        trial's peak electron density (n_e,peak / n_e,crit), included in each
+        curve's legend entry.
+    """
     df_main = pd.read_csv(csv_filepath)
+    crit_ne = calc_crit_ne(wavelength)
 
-    plt.figure(figsize=(7, 6))
+    fig, ax = plt.subplots(figsize=(9, 6))
 
     for trial_idx in trial_indcs:
         trial_row = df_main[df_main['trial_index'] == trial_idx]
@@ -392,41 +475,56 @@ def plot_DE_vs_wavelength(
         trial_csv_path = os.path.join(results_path, f"{trial_idx}", "DE_vs_wavelength.csv")
         df = pd.read_csv(trial_csv_path)
 
-        wavelength = df['Wavelength_um'].values
+        wavelengths = df['Wavelength_um'].values
         diffraction_efficiency = df['DE_reflected_m1'].values
 
-        plt.plot(wavelength, diffraction_efficiency, marker='o', linestyle='-', label=f'Trial {trial_idx}: {reward}')
+        label = f'Trial {trial_idx} (reward={reward:.3f}'
+        fdtd_path = os.path.join(results_path, f"{trial_idx}", "FDTD_result.csv")
+        if os.path.exists(fdtd_path):
+            ne_peak = pd.read_csv(fdtd_path)["ne_peak"].values[0]
+            norm_ne = ne_peak / crit_ne
+            label += f', norm $n_e$={norm_ne:.3f}'
+        label += ')'
 
-    if include_prototype:
-        if prototype_dir is None:
-            prototype_dir = os.path.join(get_prototype_results_root(), "0")
+        ax.plot(wavelengths, diffraction_efficiency, marker='o', linestyle='-', label=label)
+
+    if include_prototype and prototype_dir is not None:
         proto_de_path = os.path.join(prototype_dir, "DE_vs_wavelength.csv")
 
         if os.path.exists(proto_de_path):
-            if prototype_csv_filepath is None:
-                prototype_csv_filepath = get_data_root() / "csvs" / "prototype_data.csv"
-
-            label = "Prototype"
-            if os.path.exists(prototype_csv_filepath):
+            label = 'Prototype'
+            if prototype_csv_filepath is not None and os.path.exists(prototype_csv_filepath):
                 prototype_reward = pd.read_csv(prototype_csv_filepath)['reward'].iloc[0]
-                label = f"Prototype: {prototype_reward}"
+                label += f' (reward={prototype_reward:.3f}'
+            else:
+                label += ' ('
+
+            proto_fdtd_path = os.path.join(prototype_dir, "FDTD_result.csv")
+            if os.path.exists(proto_fdtd_path):
+                proto_ne_peak = pd.read_csv(proto_fdtd_path)["ne_peak"].values[0]
+                proto_norm_ne = proto_ne_peak / crit_ne
+                label += f', norm $n_e$={proto_norm_ne:.3f}'
+            label += ')'
 
             df_proto = pd.read_csv(proto_de_path)
-            wavelength = df_proto['Wavelength_um'].values
-            diffraction_efficiency = df_proto['DE_reflected_m1'].values
+            proto_wavelengths = df_proto['Wavelength_um'].values
+            proto_diffraction_efficiency = df_proto['DE_reflected_m1'].values
 
-            plt.plot(
-                wavelength, diffraction_efficiency, marker='*', markersize=12,
+            ax.plot(
+                proto_wavelengths, proto_diffraction_efficiency, marker='*', markersize=12,
                 linestyle='--', color='red', linewidth=2, zorder=5, label=label,
             )
 
-    plt.title('Diffraction Efficiency vs Wavelength')
-    plt.xlabel('Wavelength (um)')
-    plt.ylabel('Diffraction Efficiency')
-    plt.grid(True)
-    # plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left')
-    plt.legend(loc='lower right')
-    plt.tight_layout()
+    ax.set_title('Diffraction Efficiency vs Wavelength')
+    ax.set_xlabel('Wavelength (um)')
+    ax.set_ylabel('Diffraction Efficiency')
+    ax.grid(True)
 
-    plt.savefig(output_filepath)
-    plt.close()
+    # Legend lives outside the axes, in the right margin, so it never
+    # overlaps the curves.
+    ax.legend(loc='center left', bbox_to_anchor=(1.02, 0.5), fontsize=9, frameon=True)
+    fig.subplots_adjust(left=0.09, right=0.6, top=0.93, bottom=0.09)
+
+    Path(output_filepath).parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_filepath)
+    plt.close(fig)

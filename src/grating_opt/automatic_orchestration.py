@@ -11,18 +11,20 @@ from src.grating_opt.utils import save_trial_data
 
 
 class Runner(IRunner):
-    def __init__(self, results_dir: str = 'Results', *args, **kwargs):
+    def __init__(self, experiment_root, results_dir: str = 'Results', *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.results_dir = results_dir
+        self.experiment_root = experiment_root
+        self.results_root = experiment_root / results_dir
 
     def run_trial(
         self, trial_index: int, parameterization: TParameterization
     ) -> dict[str, Any]:
-        
+
         res = call_on_same_node(
+            experiment_root=self.experiment_root,
+            results_root=self.results_root,
             trial=trial_index,
             params=parameterization,
-            results_dir=self.results_dir
         )
 
         res["params"] = parameterization
@@ -56,6 +58,7 @@ class Runner(IRunner):
 class Metric(IMetric):
     def __init__(
             self,
+            experiment_root,
             crit_ne: float,
             csv_filename: str,
             a: float=5,
@@ -69,6 +72,7 @@ class Metric(IMetric):
             **kwargs
     ):
         super().__init__(*args, **kwargs)
+        self.experiment_root = experiment_root
         self.a = a
         self.b = b
         self.crit_ne = crit_ne
@@ -112,6 +116,7 @@ class Metric(IMetric):
             )
 
         save_trial_data(
+            root=self.experiment_root,
             trial_index=trial_index,
             reward=reward,
             params=trial_metadata["params"],
